@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "NODE_ENV=development DEBUG=redux500 node index",
-    "prod": "NODE_ENV=production PORT=8080 DEBUG=redux500 node index"
+    "prod": "NODE_ENV=production PORT=8080 DEBUG=redux500 node index",
+    "build": "webpack --stats --progress --config ./webpack/prod.config.js",
+    "lint": "eslint src"
   },
   "repository": {
     "type": "git",

@@ -30,7 +30,7 @@ module.exports = {
       { test: /\.js$/, exclude: /node_modules/, loaders: [strip.loader("debug"), "babel?cacheDirectory"] },
       { test: /\.json$/, loader: 'json-loader' },
       // enable css loading with special options for css module spec and define the class key for easier debugging
-      { test: /\.scss$/, loader: ExtractTextPlugin.extract("style", "css?modules&importLoaders=2&sourceMap&localIdentName=[name]-[local]-[hash:base64:5]!autoprefixer?browsers=last 2 version!sass?outputStyle=expanded&sourceMap" }
+      { test: /\.scss$/, loader: ExtractTextPlugin.extract("style", "css?modules&importLoaders=2&sourceMap&localIdentName=[name]-[local]-[hash:base64:5]!autoprefixer?browsers=last 2 version!sass?outputStyle=expanded&sourceMap") }
     ]
   },
   progress: true,
@@ -47,7 +47,7 @@ module.exports = {
       "process.env": {
         // Mainly used to require CSS files with webpack, which can happen only on browser
         // Used as `if (process.env.BROWSER)...`
-        BROWSER: JSON.stringify(true)
+        BROWSER: JSON.stringify(true),
         NODE_ENV: JSON.stringify("development")       
       }
     }),

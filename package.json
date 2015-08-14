@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "NODE_ENV=development DEBUG=redux500 node index",
     "prod": "NODE_ENV=production PORT=8080 DEBUG=redux500 node index",
-    "build": "webpack --stats --progress --config ./webpack/prod.config.js",
+    "build": "NODE_ENV=production webpack --stats --progress --config ./webpack/prod.config.js",
     "lint": "eslint src"
   },
   "repository": {

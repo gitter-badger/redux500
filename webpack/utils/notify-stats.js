@@ -7,7 +7,7 @@ function notifyWarning(warning) {
   console.log(warning);
 }
 
-module.exports = function notifyStats(stats) {
+export default function notifyStats(stats) {
   var json = stats.toJson();
   if (json.errors.length > 0) {
     json.errors.forEach(notifyError);

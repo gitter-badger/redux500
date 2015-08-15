@@ -6,6 +6,7 @@ import cookieParser from "cookie-parser";
 import favicon from "serve-favicon";
 import morgan from "morgan";
 import csurf from "csurf";
+import render from "./render";
 
 // Initialize express server
 
@@ -31,10 +32,7 @@ if (server.get("env") === "development") {
 }
 
 // Render the app server-side and send it as response
-// TODO the react server-side render logic
-server.use((req, res, next) => {
-  res.send("Server works");
-});
+server.use(render);
 
 // Generic server errors (e.g. not caught by components)
 server.use((err, req, res, next) => {  // eslint-disable-line no-unused-vars

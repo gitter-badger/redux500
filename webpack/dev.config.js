@@ -11,9 +11,6 @@ var assetsPath = path.resolve(__dirname, "../static/dist");
 var WEBPACK_HOST = "localhost";
 var WEBPACK_PORT = parseInt(process.env.PORT) + 1 || 3001;
 
-// TODO optimize rebundling speed by not parsing react.js or other large libraries
-// https://christianalfoni.github.io/react-webpack-cookbook/Optimizing-rebundling.html
-
 module.exports = {
   devtool: "cheap-module-eval-source-map",
   entry: {

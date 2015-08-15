@@ -1,8 +1,8 @@
 import Location from "react-router/lib/Location";
 import React from "react";
-import router from "../shared/router";
+import router from "../router";
 import Html from "./html";
-import createStore from "../shared/redux/create";
+import createStore from "../redux/create";
 
 export default function render(req, res, next){
   const webpackStats = require("./webpack-stats.json");

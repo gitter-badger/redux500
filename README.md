@@ -31,3 +31,7 @@ rules](http://eslint.org/docs/rules).
 It uses the [babel-eslint](https://github.com/babel/babel-eslint) parser to
 make it working with babeljs, and the [eslint-plugin-react](github.com/yannickcr/eslint-plugin-react)
 plugin to enable React-specific rules.
+
+### Router
+
+Routing is done using [react-router](http://rackt.github.io/react-router/) and abstracted in a `createRouter` function. `createRouter` runs on both the client & server side environment, returning the currently matched route handler. Within `createRouter`, we run a transition hook which will fire the static `fetchData` function on the route handler. This allows us to wait for data to be available before rendering the route. 

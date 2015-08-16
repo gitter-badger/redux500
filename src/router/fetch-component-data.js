@@ -13,6 +13,7 @@ export default function fetchComponentData(store) {
       .filter((component) => getFetchData(component))         // only look at ones with a static fetchData()
       .map(getFetchData)                                      // pull out fetch data methods
       .map(fetchData => fetchData(store, nextState.params));  // call fetch data methods and save promises
+      
     Promise.all(promises)
       .then(() => {
         callback(); // can't just pass callback to then() because callback assumes first param is error

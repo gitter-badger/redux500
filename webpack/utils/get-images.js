@@ -1,4 +1,4 @@
-export default function getImages(json){
+export default function getImages(json, publicPath){
   // Find compiled images in modules
   // it will be used to map original filename to the compiled one
   // for server side rendering

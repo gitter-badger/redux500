@@ -17,7 +17,7 @@ export default function writeStats(stats, env) {
 
   const cssModules = getCssModules(json, env);
 
-  const images = getImages(json);
+  const images = getImages(json, publicPath);
 
   const content = {
     script: script,

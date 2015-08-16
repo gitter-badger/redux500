@@ -2,7 +2,7 @@
 
 import Location from "react-router/lib/Location";
 import React from "react";
-import router from "../router";
+import createRouter from "../router/create-router";
 import Html from "./html";
 import createStore from "../redux/create";
 
@@ -19,7 +19,7 @@ export default function render(req, res, next){
 
   const store = createStore();
 
-  router(location, undefined, store)
+  createRouter(location, undefined, store)
     .then(({component, transition, isRedirect}) => {
       if (isRedirect) {
         res.redirect(transition.redirectInto.pathname);

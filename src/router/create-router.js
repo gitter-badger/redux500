@@ -2,7 +2,7 @@ import React from "react";
 import Router from "react-router";
 import createRoutes from "./create-routes";
 import { Provider } from "react-redux";
-import createTransitionHook from "./create-transition-hook";
+import fetchComponentData from "./fetch-component-data";
 
 export default function createRouter(location, history, store) {
   const routes = createRoutes(store);
@@ -12,7 +12,7 @@ export default function createRouter(location, history, store) {
   // before resolving with the route handlers to be rendered on the server and client side
 
   return new Promise((resolve, reject) => {
-    Router.run(routes, location, [createTransitionHook(store)], (error, initialState, transition) => {
+    Router.run(routes, location, [fetchComponentData(store)], (error, initialState, transition) => {
       if (error) {
         return reject(error);
       }

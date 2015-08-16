@@ -4,7 +4,7 @@ const getFetchData = (component={}) => {
     component.fetchData;
 };
 
-export default function createTransitionHook(store) {
+export default function fetchComponentData(store) {
   // this allows us to run route-specific actions before transitioning
   
   return (nextState, transition, callback) => {

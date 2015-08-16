@@ -1,6 +1,8 @@
 // This is the webpack config to use during development.
 // It enables the hot module replacement, the source maps and inline CSS styles.
 
+/* eslint no-var: 0 */
+
 var path = require("path");
 var webpack = require("webpack");
 var writeStats = require("./utils/write-stats");
@@ -28,10 +30,10 @@ module.exports = {
   },
   module: {
     loaders: [
-      { test: /\.(jpe?g|png|gif|svg)$/, loader: 'url', query: {limit: 8000} },
+      { test: /\.(jpe?g|png|gif|svg)$/, loader: "url", query: {limit: 8000} },
       { test: /\.js$/, exclude: /node_modules/, loaders: ["react-hot", "babel?cacheDirectory"] },
       // enable css loading with special options for css module spec and define the class key for easier debugging
-      { test: /\.scss$/, loader: 'style!css?modules&importLoaders=2&sourceMap&localIdentName=[name]-[local]-[hash:base64:5]!autoprefixer?browsers=last 2 version!sass?outputStyle=expanded&sourceMap' }
+      { test: /\.scss$/, loader: "style!css?modules&importLoaders=2&sourceMap&localIdentName=[name]-[local]-[hash:base64:5]!autoprefixer?browsers=last 2 version!sass?outputStyle=expanded&sourceMap" }
     ]
   },
   progress: true,
@@ -47,25 +49,25 @@ module.exports = {
         // Used as `if (process.env.BROWSER)...`
         BROWSER: JSON.stringify(true),
         NODE_ENV: JSON.stringify("development"),
-        DEVTOOLS: true  // <-------- DISABLE redux-devtools HERE        
+        DEVTOOLS: true  // <-------- DISABLE redux-devtools HERE
       }
     }),
 
     // stats
     function () {
-      this.plugin('done', notifyStats);
+      this.plugin("done", notifyStats);
     },
-    
+
     function () {
-      this.plugin('done', function(stats) {
-        writeStats.call(this, stats, 'dev');
+      this.plugin("done", function(stats) {
+        writeStats.call(this, stats, "dev");
       });
     },
 
     // print a webpack progress
     new webpack.ProgressPlugin(function(percentage, message) {
-      var MOVE_LEFT = new Buffer("1b5b3130303044", "hex").toString();
-      var CLEAR_LINE = new Buffer("1b5b304b", "hex").toString();
+      const MOVE_LEFT = new Buffer("1b5b3130303044", "hex").toString();
+      const CLEAR_LINE = new Buffer("1b5b304b", "hex").toString();
       process.stdout.write(CLEAR_LINE + Math.round(percentage * 100) + "% :" + message + MOVE_LEFT);
     })
 

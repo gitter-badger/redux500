@@ -1,3 +1,5 @@
+/* eslint no-console: 0 */
+
 import WebpackDevServer from "webpack-dev-server";
 import webpack from "webpack";
 import config from "./dev.config";
@@ -18,7 +20,7 @@ const serverOptions = {
 }
 
 const compiler = webpack(config, function(err, stats){
-  var json = stats.toJson();
+  const json = stats.toJson();
   if (json.errors.length)
     console.error(json.errors[0])
 });
@@ -26,5 +28,5 @@ const compiler = webpack(config, function(err, stats){
 const webpackDevServer = new WebpackDevServer(compiler, serverOptions);
 
 webpackDevServer.listen(WEBPACK_PORT, WEBPACK_HOST, function() {
-  console.info('==> 🚧  Webpack development server listening on %s:%s', WEBPACK_HOST, WEBPACK_PORT);
+  console.info("==> 🚧  Webpack development server listening on %s:%s", WEBPACK_HOST, WEBPACK_PORT);
 });

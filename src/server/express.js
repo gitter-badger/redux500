@@ -1,3 +1,5 @@
+/* eslint no-console: 0 */
+
 import path from "path";
 import express from "express";
 import compression from "compression";
@@ -19,7 +21,7 @@ server.use(bodyParser.json());
 server.use(cookieParser());
 server.use(compression());
 server.use(favicon(path.resolve(__dirname, "../../static/assets/favicon.png")));
-server.use(require('serve-static')(path.resolve(__dirname, "../../static")));
+server.use(require("serve-static")(path.resolve(__dirname, "../../static")));
 
 // TODO locales - we may want to consider i18n-node?
 

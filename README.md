@@ -2,6 +2,7 @@
 
 The [redux](https://github.com/rackt/redux) version of [isomorphic500](http://github.com/gpbl/isomorphic500). Work in progress!
 
+[![Build Status](https://travis-ci.org/gpbl/redux500.svg?branch=master)](https://travis-ci.org/gpbl/redux500)
 
 ## Development
 
@@ -9,9 +10,9 @@ The [redux](https://github.com/rackt/redux) version of [isomorphic500](http://gi
 
 ...
 
-### Travis CI
+### Continuous integration
 
-...
+CI runs with [Travis](https://travis-ci.org/gpbl/redux500). See [.travis.yml](.travis.yml) for its config.
 
 ### Linting
 

@@ -9,7 +9,6 @@
     "quotes": [1, "double"],
     "no-var": 1,
     "arrow-spacing": 1,
-    "arrow-parens": 1,
     "prefer-const": 1,
     "react/jsx-uses-react": 1
   },

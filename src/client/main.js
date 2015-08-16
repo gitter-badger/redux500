@@ -1,3 +1,5 @@
+/* eslint no-console: 0 */
+
 import React from 'react';
 import BrowserHistory from 'react-router/lib/BrowserHistory';
 import Location from 'react-router/lib/Location';
@@ -11,7 +13,7 @@ const dest = document.getElementById('content');
 
 router(location, history, store)
   .then(({component}) => {
-     React.render(component, dest);
+      React.render(component, dest);
   }, (error) => {
     console.error(error);
   });

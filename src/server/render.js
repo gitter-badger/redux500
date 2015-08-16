@@ -1,3 +1,5 @@
+/* eslint no-console: 0 */
+
 import Location from "react-router/lib/Location";
 import React from "react";
 import router from "../router";
@@ -25,11 +27,11 @@ export default function render(req, res, next){
       }
 
       const content = React.renderToString(component);
-      
+
       const html = React.renderToStaticMarkup(
-        <Html 
-          webpackStats={webpackStats} 
-          content={content} 
+        <Html
+          webpackStats={webpackStats}
+          content={content}
           store={store}/>
       );
 

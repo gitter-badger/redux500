@@ -7,7 +7,6 @@ require("babel/register");
 var path = require("path");
 var webpack = require("webpack");
 var writeStats = require("./utils/write-stats");
-var CleanPlugin = require("clean-webpack-plugin");
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var strip = require("strip-loader");
 
@@ -54,8 +53,6 @@ module.exports = {
   },
   progress: true,
   plugins: [
-    // A webpack plugin to remove/clean your build folder(s) before building
-    new CleanPlugin([relativeAssetsPath]),
 
     // css files from the extract-text-plugin loader
     new ExtractTextPlugin("[name]-[chunkhash].css", {

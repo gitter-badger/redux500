@@ -27,7 +27,7 @@ class Html extends Component {
           <meta property="twitter:description" content={description}/>
 
           <link rel="shortcut icon" href="/favicon.ico" />
-          { 
+          {
             webpackStats.css.files.map((css, i) => {
               return <link href={css} key={i} rel="stylesheet" />;
             })
@@ -36,7 +36,7 @@ class Html extends Component {
         <body>
           <div id="content" dangerouslySetInnerHTML={{__html: content}} />
           <script dangerouslySetInnerHTML={{__html: `window.__INITIAL_DATA__=${serialize(store.getState())};`}} />
-          { 
+          {
             webpackStats.script.map((src, i) => {
               return <script src={ src } key={ i } />;
             })

@@ -1,16 +1,17 @@
 // Webpack config for creating the production bundle.
 
+/* eslint no-var: 0 */
+
 require("babel/register");
 
 var path = require("path");
 var webpack = require("webpack");
 var writeStats = require("./utils/write-stats");
-var notifyStats = require("./utils/notify-stats");
-var CleanPlugin = require('clean-webpack-plugin');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var CleanPlugin = require("clean-webpack-plugin");
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var strip = require("strip-loader");
 
-var relativeAssetsPath = '../static/dist';
+var relativeAssetsPath = "../static/dist";
 var assetsPath = path.resolve(__dirname, relativeAssetsPath);
 
 module.exports = {
@@ -28,11 +29,27 @@ module.exports = {
   },
   module: {
     loaders: [
-      { test: /\.(jpe?g|png|gif|svg)$/, loader: "url", query: {limit: 8000} },
-      { test: /\.js$/, exclude: /node_modules/, loaders: [strip.loader("debug"), "babel?cacheDirectory"] },
-      { test: /\.json$/, loader: 'json-loader' },
+      {
+        test: /\.(jpe?g|png|gif|svg)$/,
+        loader: "url",
+        query: {
+          limit: 8000
+        }
+      },
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loaders: [strip.loader("debug"), "babel?cacheDirectory"]
+      },
+      {
+        test: /\.json$/,
+        loader: "json-loader"
+      },
       // enable css loading with special options for css module spec and define the class key for easier debugging
-      { test: /\.scss$/, loader: ExtractTextPlugin.extract("style", "css?modules&importLoaders=2&sourceMap&localIdentName=[name]-[local]-[hash:base64:5]!autoprefixer?browsers=last 2 version!sass?outputStyle=expanded&sourceMap") }
+      {
+        test: /\.scss$/,
+        loader: ExtractTextPlugin.extract("style", "css?modules&importLoaders=2&sourceMap&localIdentName=[name]-[local]-[hash:base64:5]!autoprefixer?browsers=last 2 version!sass?outputStyle=expanded&sourceMap")
+      }
     ]
   },
   progress: true,
@@ -41,7 +58,9 @@ module.exports = {
     new CleanPlugin([relativeAssetsPath]),
 
     // css files from the extract-text-plugin loader
-    new ExtractTextPlugin('[name]-[chunkhash].css', {allChunks: true}),
+    new ExtractTextPlugin("[name]-[chunkhash].css", {
+      allChunks: true
+    }),
 
     new webpack.NoErrorsPlugin(),
 
@@ -59,14 +78,14 @@ module.exports = {
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.optimize.UglifyJsPlugin({
       compress: {
-          warnings: false
-        }
+        warnings: false
+      }
     }),
 
     // stats
     function () {
-      this.plugin('done', function(stats) {
-        writeStats.call(this, stats, 'prod');
+      this.plugin("done", function (stats) {
+        writeStats.call(this, stats, "prod");
       });
     }
 

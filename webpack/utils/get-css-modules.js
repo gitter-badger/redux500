@@ -1,7 +1,7 @@
 import path from "path";
 
 export default function getCssModules(json, env){
-  let cssModules = {};
+  const cssModules = {};
 
   json.modules
     .filter(function(m) {
@@ -14,8 +14,8 @@ export default function getCssModules(json, env){
     })
     .forEach(function(m) {
       //find index of '/src' inside the module name, slice it and resolve path
-      var srcIndex = m.name.indexOf("/src");
-      var name = path.resolve(__dirname, "../../", m.name.slice(srcIndex + "/src".length));
+      const srcIndex = m.name.indexOf("/src");
+      let name = path.resolve(__dirname, "../../", m.name.slice(srcIndex + "/src".length));
       if (name) {
         // Resolve the e.g.: "C:\"  issue on windows
         const i = name.indexOf(":");
@@ -25,8 +25,8 @@ export default function getCssModules(json, env){
       }
       //end
       if (m.source) {
-        var regex = env === "prod" ? /module\.exports = ((.|\n)+);/ : /exports\.locals = ((.|\n)+);/;
-        var match = m.source.match(regex);
+        const regex = env === "prod" ? /module\.exports = ((.|\n)+);/ : /exports\.locals = ((.|\n)+);/;
+        const match = m.source.match(regex);
         cssModules[name] = match ? JSON.parse(match[1]) : {};
       }
     });

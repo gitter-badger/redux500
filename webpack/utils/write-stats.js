@@ -30,4 +30,4 @@ export default function writeStats(stats, env) {
 
   fs.writeFileSync(filepath, JSON.stringify(content));
 
-};
+}

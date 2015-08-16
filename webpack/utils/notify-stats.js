@@ -1,3 +1,5 @@
+/* eslint no-console: 0 */
+
 function notifyError(error) {
   // BELLs when something goes wrong!
   console.log("\x07" + error);
@@ -8,7 +10,7 @@ function notifyWarning(warning) {
 }
 
 export default function notifyStats(stats) {
-  var json = stats.toJson();
+  const json = stats.toJson();
   if (json.errors.length > 0) {
     json.errors.forEach(notifyError);
   } else if (json.warnings.length > 0) {

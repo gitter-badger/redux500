@@ -1,5 +1,7 @@
 // Webpack config for creating the production bundle.
 
+require("babel/register");
+
 var path = require("path");
 var webpack = require("webpack");
 var writeStats = require("./utils/write-stats");
@@ -48,7 +50,7 @@ module.exports = {
         // Mainly used to require CSS files with webpack, which can happen only on browser
         // Used as `if (process.env.BROWSER)...`
         BROWSER: JSON.stringify(true),
-        NODE_ENV: JSON.stringify("development")       
+        NODE_ENV: JSON.stringify("development")
       }
     }),
 

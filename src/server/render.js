@@ -3,7 +3,7 @@
 import Location from "react-router/lib/Location";
 import React from "react";
 import createRouter from "../router/create-router";
-import Html from "./html";
+import Html from "../components/Html";
 import createStore from "../redux/create";
 
 export default function render(req, res, next) {

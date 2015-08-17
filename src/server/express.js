@@ -7,7 +7,6 @@ import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import favicon from "serve-favicon";
 import morgan from "morgan";
-import csurf from "csurf";
 import render from "./render";
 
 // Initialize express server
@@ -24,8 +23,6 @@ server.use(favicon(path.resolve(__dirname, "../../static/assets/favicon.png")));
 server.use(require("serve-static")(path.resolve(__dirname, "../../static")));
 
 // TODO locales - we may want to consider i18n-node?
-
-server.use(csurf({ cookie: true }));
 
 // On development, serve the static files from the webpack dev server.
 

@@ -28,5 +28,5 @@ const compiler = webpack(config, function(err, stats){
 const webpackDevServer = new WebpackDevServer(compiler, serverOptions);
 
 webpackDevServer.listen(WEBPACK_PORT, WEBPACK_HOST, function() {
-  console.info("==> 🚧  Webpack development server listening on %s:%s", WEBPACK_HOST, WEBPACK_PORT);
+  console.log("🚧 Webpack development server listening on %s:%s", WEBPACK_HOST, WEBPACK_PORT);
 });

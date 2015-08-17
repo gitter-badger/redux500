@@ -26,7 +26,7 @@ server.use(favicon(path.resolve(__dirname, "../../static/assets/favicon.png")));
 
 // Use the `static` dir for serving static assets. On production, it contains the js
 // files built with webpack
-server.use(serveStatic)(path.resolve(__dirname, "../../static"));
+server.use(serveStatic(path.resolve(__dirname, "../../static")));
 
 // ...while on development, serve the js files with a webpack dev server.
 if (server.get("env") === "development") {

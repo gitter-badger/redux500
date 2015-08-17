@@ -1,6 +1,6 @@
 import path from "path";
 
-export default function getCssModules(json, env){
+export default function getCssModules(json, env) {
   const cssModules = {};
 
   json.modules

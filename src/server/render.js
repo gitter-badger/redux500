@@ -6,7 +6,7 @@ import createRouter from "../router/create-router";
 import Html from "./html";
 import createStore from "../redux/create";
 
-export default function render(req, res, next){
+export default function render(req, res, next) {
   const webpackStats = require("./webpack-stats.json");
 
   if (process.env.NODE_ENV === "development") {
@@ -30,12 +30,12 @@ export default function render(req, res, next){
 
       const html = React.renderToStaticMarkup(
         <Html
-          webpackStats={webpackStats}
-          content={content}
-          store={store}/>
+          webpackStats={ webpackStats }
+          content={ content }
+          store={ store }/>
       );
 
-      res.send(`<!doctype html>\n${html}`);
+      res.send(`<!doctype html>${html}`);
     })
     .catch((err) => {
       if (err.redirect) {

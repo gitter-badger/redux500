@@ -29,8 +29,8 @@ export default function createRouter(location, history, store) {
       }
 
       const component = (
-        <Provider store={store} key="provider">
-          {() => <Router {...initialState} children={routes}/>}
+        <Provider store={ store } key="provider">
+          { () => <Router { ...initialState } children={ routes } /> }
         </Provider>
       );
 

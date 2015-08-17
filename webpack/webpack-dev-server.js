@@ -19,10 +19,11 @@ const serverOptions = {
   stats: {colors: true}
 }
 
-const compiler = webpack(config, function(err, stats){
+const compiler = webpack(config, function(err, stats) {
   const json = stats.toJson();
-  if (json.errors.length)
+  if (json.errors.length) {
     console.error(json.errors[0])
+  }
 });
 
 const webpackDevServer = new WebpackDevServer(compiler, serverOptions);

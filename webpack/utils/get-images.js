@@ -1,7 +1,7 @@
-export default function getImages(json, publicPath){
-  // Find compiled images in modules
-  // it will be used to map original filename to the compiled one
-  // for server side rendering
+// Find compiled images in modules,  used to map original filenames to the
+// compiled ones for server side rendering
+
+export default function getImages(json, publicPath) {
 
   const imagesRegex = /\.(jpe?g|png|gif|svg)$/;
   const images = json.modules

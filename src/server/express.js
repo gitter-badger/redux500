@@ -5,9 +5,9 @@ import express from "express";
 import compression from "compression";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
+import serveStatic from "serve-static";
 import favicon from "serve-favicon";
 import morgan from "morgan";
-import csurf from "csurf";
 import render from "./render";
 
 // Initialize express server
@@ -21,14 +21,14 @@ server.use(bodyParser.json());
 server.use(cookieParser());
 server.use(compression());
 server.use(favicon(path.resolve(__dirname, "../../static/assets/favicon.png")));
-server.use(require("serve-static")(path.resolve(__dirname, "../../static")));
 
 // TODO locales - we may want to consider i18n-node?
 
-server.use(csurf({ cookie: true }));
+// Use the `static` dir for serving static assets. On production, it contains the js
+// files built with webpack
+server.use(serveStatic(path.resolve(__dirname, "../../static")));
 
-// On development, serve the static files from the webpack dev server.
-
+// ...while on development, serve the js files with a webpack dev server.
 if (server.get("env") === "development") {
   require("../../webpack/webpack-dev-server");
 }
@@ -37,7 +37,7 @@ if (server.get("env") === "development") {
 server.use(render);
 
 // Generic server errors (e.g. not caught by components)
-server.use((err, req, res, next) => {  // eslint-disable-line no-unused-vars
+server.use((err, req, res, next) => {                         // eslint-disable-line no-unused-vars
   console.log("Error on request %s %s", req.method, req.url);
   console.log(err);
   console.log(err.stack);
@@ -45,7 +45,6 @@ server.use((err, req, res, next) => {  // eslint-disable-line no-unused-vars
 });
 
 // Finally, start the express server
-
 server.set("port", process.env.PORT || 3000);
 
 server.listen(server.get("port"), () => {

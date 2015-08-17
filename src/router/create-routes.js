@@ -1,11 +1,7 @@
 import React from "react";
 import { Route } from "react-router";
-import Home from "../components/pages/home";
+import HomePage from "../components/HomePage";
 
-export default function createRoutes(){
-  return (
-    <Route path="/" component={ Home }>
-
-    </Route>
-  )
+export default function createRoutes() {
+  return <Route path="/" component={ HomePage } />;
 }

@@ -15,18 +15,23 @@ const serverOptions = {
   inline: true,
   lazy: false,
   publicPath: config.output.publicPath,
-  headers: {"Access-Control-Allow-Origin": "*"},
-  stats: {colors: true}
+  headers: {
+    "Access-Control-Allow-Origin": "*"
+  },
+  stats: {
+    colors: true
+  }
 }
 
-const compiler = webpack(config, function(err, stats){
+const compiler = webpack(config, function(err, stats) {
   const json = stats.toJson();
-  if (json.errors.length)
+  if (json.errors.length) {
     console.error(json.errors[0])
+  }
 });
 
 const webpackDevServer = new WebpackDevServer(compiler, serverOptions);
 
 webpackDevServer.listen(WEBPACK_PORT, WEBPACK_HOST, function() {
-  console.info("==> 🚧  Webpack development server listening on %s:%s", WEBPACK_HOST, WEBPACK_PORT);
+  console.log("🚧  Webpack development server listening on %s:%s", WEBPACK_HOST, WEBPACK_PORT);
 });

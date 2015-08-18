@@ -1,7 +1,21 @@
-import React from "react";
-import { Route } from "react-router";
 import HomePage from "../components/HomePage";
+import FeaturedRoute from "./featured-route";
+import PhotoRoute from "./photo-route";
 
 export default function createRoutes() {
-  return <Route path="/" component={ HomePage } />;
+
+  const rootRoute = {
+    childRoutes: [
+      {
+        path: "/",
+        component: HomePage,
+        childRoutes: [
+          FeaturedRoute,
+          PhotoRoute
+        ]
+      }
+    ]
+  }
+
+  return rootRoute;
 }

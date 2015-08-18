@@ -1,3 +1,5 @@
+// helper function that allows us to grab the fetchData static property of a component, 
+// or a child component wrapped by many parents
 const getFetchData = (component={}) => {
   return component.WrappedComponent ?
     getFetchData(component.WrappedComponent) :

@@ -1,6 +1,6 @@
 const featuredRoute = {
 
-  path: "/photo/:id",
+  path: "photo/:id",
   
   getComponents(cb) {
     // only asynchronously load the dependencies on client side

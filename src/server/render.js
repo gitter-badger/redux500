@@ -1,12 +1,16 @@
 /* eslint no-console: 0 */
 
+// Middleware to render the <html> document server-side
+
 import Location from "react-router/lib/Location";
 import React from "react";
-import createRouter from "../router/create-router";
+
+import createRouter from "../router/createRouter";
 import Html from "../components/Html";
 import createStore from "../redux/create";
 
 export default function render(req, res, next) {
+
   const webpackStats = require("./webpack-stats.json");
 
   if (process.env.NODE_ENV === "development") {
@@ -20,7 +24,7 @@ export default function render(req, res, next) {
   const store = createStore();
 
   createRouter(location, undefined, store)
-    .then(({component, transition, isRedirect}) => {
+    .then(({ component, transition, isRedirect }) => {
       if (isRedirect) {
         res.redirect(transition.redirectInto.pathname);
         return;
@@ -32,7 +36,7 @@ export default function render(req, res, next) {
         <Html
           webpackStats={ webpackStats }
           content={ content }
-          store={ store }/>
+          store={ store } />
       );
 
       res.send(`<!doctype html>${html}`);

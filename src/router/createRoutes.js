@@ -1,10 +1,10 @@
 import HomePage from "../components/HomePage";
-import FeaturedRoute from "./featured-route";
-import PhotoRoute from "./photo-route";
+import FeaturedRoute from "./FeaturedRoute";
+import PhotoRoute from "./PhotoRoute";
 
 export default function createRoutes() {
 
-  const rootRoute = {
+  const routes = {
     childRoutes: [
       {
         path: "/",
@@ -17,5 +17,5 @@ export default function createRoutes() {
     ]
   }
 
-  return rootRoute;
+  return routes;
 }

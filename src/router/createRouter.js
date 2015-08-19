@@ -1,8 +1,9 @@
 import React from "react";
 import Router from "react-router";
-import createRoutes from "./create-routes";
 import { Provider } from "react-redux";
-import fetchComponentData from "./fetch-component-data";
+
+import createRoutes from "./createRoutes";
+import fetchComponentData from "./fetchComponentData";
 
 export default function createRouter(location, history, store) {
   const routes = createRoutes(store);
@@ -28,14 +29,14 @@ export default function createRouter(location, history, store) {
         initialState.history = history;
       }
 
-      const component = (
+      const Component = (
         <Provider store={ store } key="provider">
           { () => <Router { ...initialState } children={ routes } /> }
         </Provider>
       );
 
       return resolve({
-        component,
+        Component,
         isRedirect: false
       });
     });

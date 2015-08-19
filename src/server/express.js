@@ -1,5 +1,7 @@
 /* eslint no-console: 0 */
 
+// Initializes and run the express server
+
 import path from "path";
 import express from "express";
 import compression from "compression";
@@ -9,8 +11,6 @@ import serveStatic from "serve-static";
 import favicon from "serve-favicon";
 import morgan from "morgan";
 import render from "./render";
-
-// Initialize express server
 
 const server = express();
 

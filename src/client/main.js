@@ -4,7 +4,7 @@ import React from "react";
 import BrowserHistory from "react-router/lib/BrowserHistory";
 import Location from "react-router/lib/Location";
 import createStore from "../redux/create";
-import createRouter from "../router/create-router";
+import createRouter from "../router/createRouter";
 
 const history = new BrowserHistory();
 const store = createStore(window.__INITIAL_DATA__);

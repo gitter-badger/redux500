@@ -1,9 +1,19 @@
 import React, { Component } from "react";
+import { Link } from "react-router";
 
 class HomePage extends Component {
   render() {
     return (
-      <h1>This is the home page</h1>
+      <div>
+        <nav>Nav</nav>
+        <p>
+          <Link to="/featured/upcoming">Upcoming Page</Link>
+        </p>
+        { this.props.children }
+        <p>
+          <Link to="/">Back to Home</Link>
+        </p>
+      </div>
     )
   }
 }

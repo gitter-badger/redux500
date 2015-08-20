@@ -10,7 +10,8 @@
     "build": "webpack --stats --progress --config ./webpack/prod.config.js",
     "lint": "eslint index.js src webpack",
     "postinstall": "npm run build",
-    "test": "mocha tests/* --compilers js:babel/register --recursive --reporter spec"
+    "test": "mocha tests/* --compilers js:babel/register --recursive --reporter spec",
+    "cover": "istanbul cover --dir artifacts -- _mocha tests/* --recursive --compilers js:babel/register --reporter spec"
   },
   "repository": {
     "type": "git",
@@ -55,6 +56,7 @@
     "express": "4.13.3",
     "extract-text-webpack-plugin": "0.8.2",
     "file-loader": "0.8.4",
+    "istanbul": "0.3.18",
     "mocha": "2.2.5",
     "morgan": "1.6.1",
     "node-sass": "3.2.0",

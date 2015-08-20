@@ -3,6 +3,11 @@
 The [redux](https://github.com/rackt/redux) version of [isomorphic500](http://github.com/gpbl/isomorphic500). Work in progress!
 
 [![Build Status](https://travis-ci.org/gpbl/redux500.svg?branch=master)](https://travis-ci.org/gpbl/redux500)
+[![Coverage Status](https://coveralls.io/repos/gpbl/redux500/badge.svg?branch=master&service=github)](https://coveralls.io/github/gpbl/redux500?branch=master)
+
+### Router
+
+Routing is done using [react-router](http://rackt.github.io/react-router/) and abstracted in a `createRouter` function. `createRouter` runs on both the client & server side environment, returning the currently matched route handler. Within `createRouter`, we run a transition hook which will fire the static `fetchData` function on the route handler. This allows us to wait for data to be available before rendering the route.
 
 ## Development
 
@@ -10,16 +15,27 @@ The [redux](https://github.com/rackt/redux) version of [isomorphic500](http://gi
 
 ...
 
-### Continuous integration
+### Testing
 
-CI runs with [Travis](https://travis-ci.org/gpbl/redux500). See [.travis.yml](.travis.yml) for its config.
+#### Unit tests
 
-### Heroku
+Unit Tests work with [mocha](https://mochajs.org) and [chai](chaijs.com/). To run the
+unit tests, enter this command from the project's root:
 
-The production app is available at https://redux500.herokuapp.com. We configured
-heroku to deploy the master branch when pushed: it runs the `npm postinstall` script
-to build the app. For this reason, modules used for the build are included in the production
-environment.
+```
+$ npm run test
+```
+
+The `test` script runs mocha with the [babel compiler](https://babeljs.io/docs/setup/#mocha).
+
+#### Test coverage
+
+We use [istanbul](https://gotwarlost.github.io/istanbul/). To run the test coverage
+report, enter:
+
+```
+$ npm run cover
+```
 
 ### Linting
 
@@ -40,6 +56,14 @@ It uses the [babel-eslint](https://github.com/babel/babel-eslint) parser to
 make it working with babeljs, and the [eslint-plugin-react](github.com/yannickcr/eslint-plugin-react)
 plugin to enable React-specific rules.
 
-### Router
+### Continuous integration
 
-Routing is done using [react-router](http://rackt.github.io/react-router/) and abstracted in a `createRouter` function. `createRouter` runs on both the client & server side environment, returning the currently matched route handler. Within `createRouter`, we run a transition hook which will fire the static `fetchData` function on the route handler. This allows us to wait for data to be available before rendering the route. 
+CI runs with [Travis](https://travis-ci.org/gpbl/redux500). See [.travis.yml](.travis.yml) for its config.
+
+### Heroku
+
+The production app is available at https://redux500.herokuapp.com. We configured
+heroku to deploy the master branch when pushed: it runs the `npm postinstall` script
+to build the app. For this reason, modules used for the build are included in the production
+environment.
+

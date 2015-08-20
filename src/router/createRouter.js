@@ -29,14 +29,14 @@ export default function createRouter(location, history, store) {
         initialState.history = history;
       }
 
-      const Component = (
+      const component = (
         <Provider store={ store } key="provider">
           { () => <Router { ...initialState } children={ routes } /> }
         </Provider>
       );
 
       return resolve({
-        Component,
+        component,
         isRedirect: false
       });
     });

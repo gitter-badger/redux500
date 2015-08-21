@@ -48,5 +48,5 @@ export default function render(req, res, next) {
       }
       console.error(`ROUTER ERROR: ${err}`);
       next(err);
-    })
+    });
 }

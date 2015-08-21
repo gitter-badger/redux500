@@ -6,7 +6,7 @@ class PhotoPage extends Component {
       <div>
         A photo
       </div>
-    )
+    );
   }
 }
 

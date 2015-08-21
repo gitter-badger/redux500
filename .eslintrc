@@ -13,6 +13,7 @@
     "no-var": 1,
     "prefer-const": 1,
     "quotes": [1, "double"],
+    "semi": [2, "always"],
     "space-before-blocks": 1,
 
     "react/jsx-curly-spacing": [1, "always"],

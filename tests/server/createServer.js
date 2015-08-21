@@ -22,6 +22,13 @@ describe("createServer", () => {
       .expect(200, done);
   });
 
+
+  it("serves favicon.ico", (done) => {
+    request(server)
+      .get("/favicon.ico")
+      .expect(200, done);
+  });
+
   it("responds to /featured/upcoming", (done) => {
     request(server)
       .get("/")

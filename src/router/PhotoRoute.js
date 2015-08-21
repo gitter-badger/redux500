@@ -12,6 +12,6 @@ const PhotoRoute = {
       callback(null, require("../components/PhotoPage"));
     }
   }
-}
+};
 
 export default PhotoRoute;

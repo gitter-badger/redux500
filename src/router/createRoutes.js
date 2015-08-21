@@ -15,7 +15,7 @@ export default function createRoutes() {
         ]
       }
     ]
-  }
+  };
 
   return routes;
 }

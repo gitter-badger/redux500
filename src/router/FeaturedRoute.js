@@ -13,6 +13,6 @@ const FeaturedRoute = {
     }
   }
 
-}
+};
 
 export default FeaturedRoute;

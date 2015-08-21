@@ -5,10 +5,11 @@ describe("createServer", () => {
   let server;
 
   beforeEach((done) => {
-    server = createServer(() => {
+    server = createServer({
+      env: "production"
+    }, () => {
       done();
     });
-
   });
 
   afterEach((done) => {

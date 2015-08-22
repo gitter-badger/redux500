@@ -20,7 +20,7 @@ export default function createRouter(location, history, store) {
 
       if (transition && transition.redirectInfo) {
         return resolve({
-          transition,
+          transition: transition,
           isRedirect: true
         });
       }
@@ -36,7 +36,7 @@ export default function createRouter(location, history, store) {
       );
 
       return resolve({
-        component,
+        component: component,
         isRedirect: false
       });
     });

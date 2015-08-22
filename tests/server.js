@@ -1,13 +1,13 @@
 import request from "supertest";
-import createServer from "../../src/server/createServer";
+import runServer from "../src/server";
 
 // Inspired by http://glebbahmutov.com/blog/how-to-correctly-unit-test-express-server/
 
-describe("createServer", () => {
+describe("server", () => {
   let server;
 
   beforeEach((done) => {
-    server = createServer({
+    server = runServer({
       env: "production"
     }, () => {
       done();

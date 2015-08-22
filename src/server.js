@@ -2,7 +2,6 @@
 
 // Create and start the express app. Export a function so we can test it
 
-import path from "path";
 import express from "express";
 import compression from "compression";
 import bodyParser from "body-parser";
@@ -10,17 +9,16 @@ import cookieParser from "cookie-parser";
 import serveStatic from "serve-static";
 import favicon from "serve-favicon";
 import morgan from "morgan";
-import render from "./render";
 
-/**
- * Create and run the express app.
- * @param  {Object}   settings Settings as specified in
- *                             http://expressjs.com/api.html#app.settings.table
- * @param  {Function} callback Function receiving the express app as first
- *                             argument
- * @return {http.Server}
- */
-export default function createServer(settings, callback) {
+import React from "react";
+import Location from "react-router/lib/Location";
+
+import { staticPath } from "../settings";
+import createRouter from "./router/createRouter";
+import Html from "./components/Html";
+import createStore from "./redux/create";
+
+export default function (settings, callback) {
 
   const app = express();
 
@@ -33,21 +31,42 @@ export default function createServer(settings, callback) {
   app.use(bodyParser.json());
   app.use(cookieParser());
   app.use(compression());
-  app.use(favicon(path.resolve(__dirname, "../../static/assets/favicon.png")));
+  app.use(favicon(`${staticPath}/assets/favicon.png`));
 
   // TODO locales - we may want to consider i18n-node?
 
   // Use the `static` dir for serving static assets. On production, it contains the js
   // files built with webpack
-  app.use(serveStatic(path.resolve(__dirname, "../../static")));
-
-  // ...while on development, serve the js files with a webpack dev server.
-  if (app.get("env") === "development") {
-    require("../../webpack/webpack-dev-server");
-  }
+  app.use(serveStatic(staticPath));
 
   // Render the app server-side and send it as response
-  app.use(render);
+  app.use((req, res, next) => {
+
+    const location = new Location(req.path, req.query);
+    const store = createStore();
+
+    createRouter(location, undefined, store)
+      .then((payload) => {
+
+        const { component, transition, isRedirect, isNotFound } = payload;
+
+        if (isRedirect) {
+          res.redirect(transition.redirectInto.pathname);
+          return;
+        }
+
+        const content = React.renderToString(component);
+        const html = React.renderToStaticMarkup(
+          <Html
+            content={ content }
+            store={ store } />
+        );
+        res.status(isNotFound ? 404 : 200).send(`<!doctype html>${html}`);
+      })
+      .catch((err) => {
+        err.redirect ? res.redirect(err.redirect) : next(err);
+      });
+  });
 
   // Generic server errors (e.g. not caught by components)
   app.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
@@ -63,4 +82,3 @@ export default function createServer(settings, callback) {
   });
 
 }
-

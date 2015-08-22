@@ -13,9 +13,11 @@ import morgan from "morgan";
 import render from "./render";
 
 /**
- * Create and run an express app.
- * @param  {Object}   settings Settings as specified in http://expressjs.com/api.html#app.settings.table
- * @param  {Function} callback Function receiving the express app as first argument
+ * Create and run the express app.
+ * @param  {Object}   settings Settings as specified in
+ *                             http://expressjs.com/api.html#app.settings.table
+ * @param  {Function} callback Function receiving the express app as first
+ *                             argument
  * @return {http.Server}
  */
 export default function createServer(settings, callback) {

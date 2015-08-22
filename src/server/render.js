@@ -11,12 +11,12 @@ import createStore from "../redux/create";
 
 export default function render(req, res, next) {
 
-  const webpackStats = require("./webpack-stats.json");
+  const webpackStats = require(`./webpack-stats-${process.env.NODE_ENV}.json`);
 
   if (process.env.NODE_ENV === "development") {
     // Do not cache webpack stats: the script file would change since
     // hot module replacement is enabled in the development env
-    delete require.cache[require.resolve("./webpack-stats.json")];
+    delete require.cache[require.resolve("./webpack-stats-development.json")];
   }
 
   const location = new Location(req.path, req.query);

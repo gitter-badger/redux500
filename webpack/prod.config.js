@@ -66,7 +66,7 @@ module.exports = {
         // Mainly used to require CSS files with webpack, which can happen only on browser
         // Used as `if (process.env.BROWSER)...`
         BROWSER: JSON.stringify(true),
-        NODE_ENV: JSON.stringify("development")
+        NODE_ENV: JSON.stringify("production")
       }
     }),
 
@@ -82,7 +82,7 @@ module.exports = {
     // stats
     function () {
       this.plugin("done", function (stats) {
-        writeStats.call(this, stats, "prod");
+        writeStats.call(this, stats, "production");
       });
     }
 

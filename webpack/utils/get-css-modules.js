@@ -5,7 +5,7 @@ export default function getCssModules(json, env) {
 
   json.modules
     .filter(function(m) {
-      if (env === "prod") {
+      if (env === "production") {
         return /\.scss$/.test(m.name);
       }
       //filter by modules with '.scss' inside name string, that also have name and moduleName that end with 'ss'(allows for css, less, sass, and scss extensions)
@@ -25,7 +25,7 @@ export default function getCssModules(json, env) {
       }
       //end
       if (m.source) {
-        const regex = env === "prod" ? /module\.exports = ((.|\n)+);/ : /exports\.locals = ((.|\n)+);/;
+        const regex = env === "production" ? /module\.exports = ((.|\n)+);/ : /exports\.locals = ((.|\n)+);/;
         const match = m.source.match(regex);
         cssModules[name] = match ? JSON.parse(match[1]) : {};
       }

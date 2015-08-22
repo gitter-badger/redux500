@@ -4,8 +4,6 @@ import getChunks from "./get-chunks";
 import getCssModules from "./get-css-modules";
 import getImages from "./get-images";
 
-const filepath = path.resolve(__dirname, "../../src/server/webpack-stats.json");
-
 export default function writeStats(stats, env) {
 
   const publicPath = this.options.output.publicPath;
@@ -28,6 +26,6 @@ export default function writeStats(stats, env) {
     images: images
   };
 
-  fs.writeFileSync(filepath, JSON.stringify(content));
-
+  const fileName = `../../src/server/webpack-stats-${env}.json`;
+  fs.writeFileSync(path.resolve(__dirname, fileName), JSON.stringify(content));
 }

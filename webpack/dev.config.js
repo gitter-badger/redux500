@@ -60,7 +60,7 @@ module.exports = {
 
     function () {
       this.plugin("done", function(stats) {
-        writeStats.call(this, stats, "dev");
+        writeStats.call(this, stats, "development");
       });
     },
 

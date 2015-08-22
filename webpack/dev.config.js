@@ -19,9 +19,9 @@ module.exports = {
     "main": [
       "webpack-dev-server/client?http://" + WEBPACK_HOST + ":" + WEBPACK_PORT,
       "webpack/hot/only-dev-server",
-      "./src/client/main.js"
     ]
   },
+    "./src/client.js"
   output: {
     path: assetsPath,
     filename: "[name]-[hash].js",

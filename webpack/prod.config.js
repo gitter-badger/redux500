@@ -15,11 +15,7 @@ var assetsPath = path.resolve(__dirname, relativeAssetsPath);
 
 module.exports = {
   devtool: "source-map",
-  entry: {
-    "main": [
-      "./src/client/main.js"
-    ]
-  },
+  entry: "./src/client.js",
   output: {
     path: assetsPath,
     filename: "[name]-[hash].js",

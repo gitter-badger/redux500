@@ -58,8 +58,6 @@ export default function createServer(settings, callback) {
   });
 
   // Finally, start the express application
-  app.set("port", process.env.PORT || 3000);
-
   return app.listen(app.get("port"), () => {
     callback(app);
   });

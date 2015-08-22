@@ -25,7 +25,7 @@ export default function createServer(settings, callback) {
   const app = express();
 
   for (const name in settings) {
-    app.set(name, settings[name])
+    app.set(name, settings[name]);
   }
 
   // Usual express stuff

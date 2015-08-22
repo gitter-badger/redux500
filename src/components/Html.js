@@ -2,16 +2,21 @@
 
 import React, { Component, PropTypes } from "react";
 import serialize from "serialize-javascript";
+import settings from "../../settings";
+
+let webpackStats;
+if (process.env.NODE_ENV === "production") {
+  webpackStats = require(`../webpack-stats.json`);
+}
 
 class Html extends Component {
   static propTypes = {
-    webpackStats: PropTypes.object,
     content: PropTypes.string,
     store: PropTypes.object
   }
 
   render() {
-    const { webpackStats, content, store } = this.props;
+    const { content, store } = this.props;
     // TODO grab title and description with react-helmet
     const title = "Redux500";
     const description = "Isomorphic500 implemented in Redux fashion";
@@ -30,7 +35,7 @@ class Html extends Component {
 
           <link rel="shortcut icon" href="/favicon.ico" />
           {
-            webpackStats.css.files.map((css, i) => {
+            webpackStats && webpackStats.css.files.map((css, i) => {
               return <link href={ css } key={ i } rel="stylesheet" />;
             })
           }
@@ -39,9 +44,14 @@ class Html extends Component {
           <div id="content" dangerouslySetInnerHTML={ {__html: content} } />
           <script dangerouslySetInnerHTML={ {__html: `window.__INITIAL_DATA__=${serialize(store.getState())};`} } />
           {
-            webpackStats.script.map((src, i) => {
+            webpackStats && webpackStats.script.map((src, i) => {
               return <script src={ src } key={ i } />;
             })
+          }
+          {
+            process.env.NODE_ENV === "development" &&
+            <script
+              src={ `http://${settings.host}:${settings.webpackPort}/dist/bundle.js` } />
           }
         </body>
       </html>

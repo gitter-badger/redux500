@@ -26,6 +26,7 @@ export default function writeStats(stats, env) {
     images: images
   };
 
-  const fileName = `../../src/server/webpack-stats-${env}.json`;
+  const fileName = `../../src/webpack-stats.json`;
   fs.writeFileSync(path.resolve(__dirname, fileName), JSON.stringify(content));
+
 }

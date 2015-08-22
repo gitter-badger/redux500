@@ -14,7 +14,7 @@ var WEBPACK_HOST = "localhost";
 var WEBPACK_PORT = parseInt(process.env.PORT) + 1 || 3001;
 
 module.exports = {
-  devtool: "cheap-module-eval-source-map",
+  devtool: "source-map",
   entry: {
     "main": [
       "webpack-dev-server/client?http://" + WEBPACK_HOST + ":" + WEBPACK_PORT,

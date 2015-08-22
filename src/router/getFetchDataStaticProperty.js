@@ -5,7 +5,7 @@
 export default function getFetchDataStaticProperty (component={}) {
 
   if ("WrappedComponent" in component) {
-    return getFetchDataStaticProperty(component.WrappedComponent)
+    return getFetchDataStaticProperty(component.WrappedComponent);
   }
 
   return component.fetchData;

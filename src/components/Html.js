@@ -45,7 +45,7 @@ class Html extends Component {
           }
         </body>
       </html>
-    )
+    );
   }
 }
 

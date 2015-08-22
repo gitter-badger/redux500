@@ -10,7 +10,7 @@ class FeaturedPage extends Component {
           <Link to="/photo/1">See photo</Link>
         </p>
       </div>
-    )
+    );
   }
 }
 

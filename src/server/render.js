@@ -51,5 +51,5 @@ export default function render(req, res, next) {
         return;
       }
       next(err);
-    })
+    });
 }

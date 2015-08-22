@@ -4,7 +4,7 @@ const NotFoundRoute = {
 
   getComponents(callback) {
     if (process.env.BROWSER) {
-      require.ensure([], (require) => {
+      require.ensure(["../components/NotFoundPage"], (require) => {
         callback(null, require("../components/NotFoundPage"));
       }, "not-found-route");
     }

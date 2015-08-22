@@ -4,7 +4,7 @@ const FeaturedRoute = {
 
   getComponents(callback) {
     if (process.env.BROWSER) {
-      require.ensure([], (require) => {
+      require.ensure(["../components/FeaturedPage"], (require) => {
         callback(null, require("../components/FeaturedPage"));
       }, "featured-route");
     }

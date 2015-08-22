@@ -6,7 +6,7 @@ class NotFoundPage extends Component {
       <div>
         Not Found
       </div>
-    )
+    );
   }
 }
 

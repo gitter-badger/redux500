@@ -12,7 +12,7 @@ var createServer = require("./src/server/createServer");
 var settings = {
   env: process.env.NODE_ENV || "development",
   port: process.env.PORT || 3000
-}
+};
 createServer(settings, function (app) {
   console.log("Express %s server listening on %s", app.get("env"), app.get("port"));
 });

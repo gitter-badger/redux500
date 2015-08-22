@@ -6,7 +6,7 @@ const FeaturedRoute = {
     if (process.env.BROWSER) {
       require.ensure([], (require) => {
         callback(null, require("../components/FeaturedPage"));
-      });
+      }, "featured");
     }
     else {
       callback(null, require("../components/FeaturedPage"));

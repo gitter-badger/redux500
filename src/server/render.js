@@ -24,7 +24,7 @@ export default function render(req, res, next) {
   const store = createStore();
 
   createRouter(location, undefined, store)
-    .then(({ component, transition, isRedirect }) => {
+    .then(({ component, transition, isRedirect, isNotFound }) => {
       if (isRedirect) {
         res.redirect(transition.redirectInto.pathname);
         return;
@@ -39,6 +39,10 @@ export default function render(req, res, next) {
           store={ store } />
       );
 
+      if (isNotFound) {
+        res.status(404);
+      }
+
       res.send(`<!doctype html>${html}`);
     })
     .catch((err) => {
@@ -46,7 +50,6 @@ export default function render(req, res, next) {
         res.redirect(err.redirect);
         return;
       }
-      console.error(`ROUTER ERROR: ${err}`);
       next(err);
     })
 }

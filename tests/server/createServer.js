@@ -1,6 +1,8 @@
 import request from "supertest";
 import createServer from "../../src/server/createServer";
 
+// Inspired by http://glebbahmutov.com/blog/how-to-correctly-unit-test-express-server/
+
 describe("createServer", () => {
   let server;
 

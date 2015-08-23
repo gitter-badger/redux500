@@ -1,4 +1,4 @@
-import { TEST_SUCCESS } from "../constants/actions";
+import { TEST_SUCCESS } from "../constants/ActionTypes";
 
 export default function test(state = {}, action = {}) {
   switch (action.type) {

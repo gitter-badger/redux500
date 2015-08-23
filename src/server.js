@@ -16,7 +16,8 @@ import Location from "react-router/lib/Location";
 import { staticPath } from "../settings";
 import createRouter from "./router/createRouter";
 import Html from "./components/Html";
-import createStore from "./redux/create";
+import buildStore from "./utils/buildStore";
+import ApiClient from "./utils/ApiClient";
 
 export default function (settings, callback) {
 
@@ -43,7 +44,8 @@ export default function (settings, callback) {
   app.use((req, res, next) => {
 
     const location = new Location(req.path, req.query);
-    const store = createStore();
+    const client = new ApiClient(req);
+    const store = buildStore(client);
 
     createRouter(location, undefined, store)
       .then((payload) => {

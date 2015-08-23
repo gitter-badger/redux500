@@ -4,11 +4,14 @@ import React from "react";
 import BrowserHistory from "react-router/lib/BrowserHistory";
 import Location from "react-router/lib/Location";
 
-import createStore from "./redux/create";
+import buildStore from "./utils/buildStore";
+import ApiClient from "./utils/ApiClient";
 import createRouter from "./router/createRouter";
 
+
 const history = new BrowserHistory();
-const store = createStore(window.__INITIAL_DATA__);
+const client = new ApiClient();
+const store = buildStore(client, window.__INITIAL_DATA__);
 const location = new Location(document.location.pathname, document.location.search);
 const mountNode = document.getElementById("content");
 

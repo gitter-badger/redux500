@@ -9,6 +9,10 @@ class HomePage extends Component {
         <p>
           <Link to="/featured/upcoming">Upcoming Page</Link>
         </p>
+        <p>
+          <Link to="/photo/1">Photo Page</Link>
+        </p>
+
         { this.props.children }
         <p>
           <Link to="/">Back to Home</Link>

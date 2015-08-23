@@ -1,6 +1,8 @@
 import HomePage from "../components/HomePage";
-import FeaturedRoute from "./FeaturedRoute";
-import PhotoRoute from "./PhotoRoute";
+
+import FeaturedRoute from "../routes/featured";
+import PhotoRoute from "../routes/photo";
+import NotFoundRoute from "../routes/not-found";
 
 export default function createRoutes() {
 
@@ -11,7 +13,8 @@ export default function createRoutes() {
         component: HomePage,
         childRoutes: [
           FeaturedRoute,
-          PhotoRoute
+          PhotoRoute,
+          NotFoundRoute
         ]
       }
     ]

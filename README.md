@@ -5,6 +5,35 @@ The [redux](https://github.com/rackt/redux) version of [isomorphic500](http://gi
 [![Build Status](https://travis-ci.org/gpbl/redux500.svg?branch=master)](https://travis-ci.org/gpbl/redux500)
 [![Coverage Status](https://coveralls.io/repos/gpbl/redux500/badge.svg?branch=master&service=github)](https://coveralls.io/github/gpbl/redux500?branch=master)
 
+## Directory structure
+
+```
+.
+├── index.js            # Starts the express server and, on dev, the webpack dev server
+├── settings.js         # Basic settings for the server, such as port, host, etc
+├── src
+│   ├── client.js       # Entry point for the browser
+│   ├── server.js       # Starts the express server and render the pages server-side
+│   ├── components      # React components
+│   │   ├── ...
+│   │   └── Html.js     # Component used to create the <html> page server-side
+│   ├── constants       # Redux constants
+│   ├── reducers        # Redux reducers
+│   ├── redux
+│   │   └── create.js   # Create the Redux instance
+│   ├── router          # Utilities to make an universal react-router
+│   └── routes          # Routes used by the router
+├── static
+│   ├── assets          # Contains static assets, such as images
+│   └── dist            # Contains files built by webpack
+├── tests               # Unit tests
+└── webpack
+    ├── dev.config.js   # Webpack config for dev environment
+    ├── prod.config.js  # Webpack config for building the prod environment
+    ├── server.js       # Runs the webpack dev server on dev environment
+    └── utils           # Plugins and utilities for webpack
+```
+
 ### Router
 
 Routing is done using [react-router](http://rackt.github.io/react-router/) and abstracted in a `createRouter` function. `createRouter` runs on both the client & server side environment, returning the currently matched route handler. Within `createRouter`, we run a transition hook which will fire the static `fetchData` function on the route handler. This allows us to wait for data to be available before rendering the route.

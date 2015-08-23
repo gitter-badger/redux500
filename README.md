@@ -9,8 +9,7 @@ The [redux](https://github.com/rackt/redux) version of [isomorphic500](http://gi
 
 ```
 .
-├── index.js            # Starts the express server and, on dev, the webpack dev server
-├── settings.js         # Basic settings for the server, such as port, host, etc
+├── index.js            # Starts the express server and the webpack dev server
 ├── src
 │   ├── client.js       # Entry point for the browser
 │   ├── server.js       # Starts the express server and render the pages server-side
@@ -43,6 +42,27 @@ Routing is done using [react-router](http://rackt.github.io/react-router/) and a
 ### Babeljs
 
 ...
+
+### Webpack
+
+[Webpack](http://webpack.github.io) is used to enable hot-reload on development
+and to build the static assets for production.
+
+In the development environment, we use webpack-dev-server to compile, serve and reload the source files
+as they are modified. The [main script](index.js) runs a [webpack-dev-server](./webpack/server.js)
+with the [development config](./webpack/dev.config.js) and it includes the webpac's
+client-side code for hot-reload. We load the bundle with a `<script>` tag
+from the [Html](./src/components/Html.js) component.
+
+> The devopment config uses the [webpack-error-notification](https://github.com/vsolovyov/webpack-error-notification)
+> plugin. To get notified on errors while compiling the code, on Mac you must `brew install terminal-notifier`.
+
+On production, we build the source for the client using the [production config](./webpack/prod.config.js).
+You run the build with `npm run build` from the command line. Webpack places
+the bundled files in the `static/dist` directory, adding an hash to skip the browsers
+cache. Since the name of the bundle changes at each build, the [Html](./src/components/Html.js) component
+extracts its name from a `stats.json` file (created with the [webpack-stats-plugin](https://www.npmjs.com/package/stats-webpack-plugin)).
+
 
 ### Testing
 

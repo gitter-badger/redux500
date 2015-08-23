@@ -7,11 +7,8 @@ describe("server", () => {
   let server;
 
   beforeEach((done) => {
-    server = runServer({
-      env: "production"
-    }, () => {
-      done();
-    });
+    process.env.PORT = 30000;
+    server = runServer(() => done());
   });
 
   afterEach((done) => {

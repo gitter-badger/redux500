@@ -84,6 +84,7 @@ report, enter:
 
 ```
 $ npm run cover
+$ open coverage/lcov-report/index.html  # opens the HTML report
 ```
 
 ### Linting

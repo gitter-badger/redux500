@@ -9,8 +9,9 @@ var webpack = require("webpack");
 var StatsWriterPlugin = require("webpack-stats-plugin").StatsWriterPlugin;
 
 // var ExtractTextPlugin = require("extract-text-webpack-plugin");
-
 var dist = path.resolve(__dirname, "../static/dist");
+
+var CleanupAssetsPlugin = require("./utils/CleanupAssetsPlugin");
 
 module.exports = {
   devtool: "source-map",
@@ -56,9 +57,14 @@ module.exports = {
       }
     }),
 
-    // Write out stats file to build directory.
-    new StatsWriterPlugin({
-      filename: "stats.json" // Default
+    // Write out stats.json file to build directory.
+    new StatsWriterPlugin(),
+
+    // Cleanup assets from previous builds
+    new CleanupAssetsPlugin({
+      assetsPath: dist,
+      exclude: ["stats.json"]
     })
+
   ]
 };

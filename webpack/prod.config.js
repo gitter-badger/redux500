@@ -11,7 +11,7 @@ var StatsWriterPlugin = require("webpack-stats-plugin").StatsWriterPlugin;
 // var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var dist = path.resolve(__dirname, "../static/dist");
 
-var CleanupAssetsPlugin = require("./utils/CleanupAssetsPlugin");
+var CleanupOutputPathPlugin = require("./utils/CleanupOutputPathPlugin");
 
 module.exports = {
   devtool: "source-map",
@@ -60,8 +60,8 @@ module.exports = {
     // Write out stats.json file to build directory.
     new StatsWriterPlugin(),
 
-    // Cleanup assets from previous builds
-    new CleanupAssetsPlugin({
+    // Cleanup extraneous files from the output directory
+    new CleanupOutputPathPlugin({
       assetsPath: dist,
       exclude: ["stats.json"]
     })

@@ -2,7 +2,21 @@
 
 import fs from "fs";
 
-class CleanupAssetsPlugin {
+/**
+ * Remove from the webpack's `output.path` directory the files not created
+ * with the current build, e.g. anything extraneous from the assets found
+ * in the last webpack stats.
+ *
+ * Example:
+ *
+ *    new CleanupOutputPathPlugin({
+ *       assetsPath: path.resolve(__dirname, "/dist"),
+ *       exclude: ["stats.json"] // keep this file(s)
+ *     })
+ *
+ */
+
+class CleanupOutputPathPlugin {
 
   constructor(options) {
     this.options = options;
@@ -26,4 +40,4 @@ class CleanupAssetsPlugin {
 
 }
 
-export default CleanupAssetsPlugin;
+export default CleanupOutputPathPlugin;

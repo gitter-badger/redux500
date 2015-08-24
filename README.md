@@ -117,3 +117,13 @@ heroku to deploy the master branch when pushed: it runs the `npm postinstall` sc
 to build the app. For this reason, modules used for the build are included in the production
 environment.
 
+# Building a first class app
+
+While redux500 suggests how to solve some of the common problems encountered building a web application,
+keep in mind that your application may have different needs. Here are some further things you could
+explore:
+
+* use a deployment server
+* improve performances using Bluebird instead of native Promises
+
+...

@@ -17,7 +17,11 @@ import { staticPath } from "../settings";
 import createRouter from "./router/createRouter";
 import Html from "./components/Html";
 import buildStore from "./utils/buildStore";
-import ApiClient from "./utils/ApiClient";
+
+import Fetchr from "fetchr";
+import PhotoService from "./services/PhotoService";
+
+Fetchr.registerService(PhotoService);
 
 export default function (settings, callback) {
 
@@ -30,6 +34,7 @@ export default function (settings, callback) {
   // Usual express stuff
   app.use(morgan(app.get("env") === "production" ? "combined" : "dev"));
   app.use(bodyParser.json());
+  app.use("/api", Fetchr.middleware());
   app.use(cookieParser());
   app.use(compression());
   app.use(favicon(`${staticPath}/assets/favicon.png`));
@@ -44,8 +49,10 @@ export default function (settings, callback) {
   app.use((req, res, next) => {
 
     const location = new Location(req.path, req.query);
-    const client = new ApiClient(req);
-    const store = buildStore(client);
+    const fetchr = new Fetchr({
+      req: req
+    });
+    const store = buildStore(fetchr);
 
     createRouter(location, undefined, store)
       .then((payload) => {

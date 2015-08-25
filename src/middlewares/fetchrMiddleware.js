@@ -30,7 +30,7 @@ export default function fetchrMiddleware(fetchrInstance) {
             failure && next({ ...rest, error, type: failure });
           }
           else {
-            success && next({ ...rest, result, type: success });
+            success && next({ ...rest, data: result, type: success });
           }
         });
     };

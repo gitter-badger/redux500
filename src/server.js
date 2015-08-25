@@ -17,7 +17,7 @@ import Fetchr from "fetchr";
 
 import createRouter from "./router/createRouter";
 import Html from "./components/Html";
-import buildStore from "./utils/buildStore";
+import createStore from "./utils/createStore";
 
 import PhotoService from "./services/PhotoService";
 
@@ -50,8 +50,10 @@ export default function (callback) {
   app.use((req, res, next) => {
 
     const location = new Location(req.path, req.query);
-    const fetcher = new Fetchr({ req });
-    const store = buildStore(fetcher);
+
+    const store = createStore({
+      fetcher: new Fetchr({ req })
+    });
 
     createRouter(location, undefined, store)
       .then((payload) => {

@@ -21,18 +21,23 @@ export default function fetchrMiddleware(fetchrInstance) {
       const { request, success, failure } = types;
       next({ ...rest, type: request });
 
-      fetchrInstance[method](service)
-        .params(params || {})
-        .body(body || {})
-        .clientConfig(config || {})
-        .end((error, result) => {
-          if (error) {
-            failure && next({ ...rest, error, type: failure });
-          }
-          else {
-            success && next({ ...rest, data: result, type: success });
-          }
-        });
+      return new Promise((resolve, reject) => {      
+        fetchrInstance[method](service)
+          .params(params || {})
+          .body(body || {})
+          .clientConfig(config || {})
+          .end((error, result) => {
+            if (error) {
+              failure && next({ ...rest, error, type: failure });
+              reject(error);
+            }
+            else {
+              success && next({ ...rest, data: result, type: success });
+              resolve();
+            }
+          });
+      })
+
     };
   };
 }

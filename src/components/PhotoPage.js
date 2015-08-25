@@ -21,7 +21,7 @@ class PhotoPage extends Component {
 }
 
 function mapStateToProps(state) {
-  return { 
+  return {
     photo: state.photosById["119478695"]
   };
 }

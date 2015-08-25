@@ -1,5 +1,5 @@
 export default function fetchrMiddleware(fetchrInstance) {
-  // signature of middleware: 
+  // signature of middleware:
   // store => next => action => ...
   return ({dispatch, getState}) => {
     return next => action => {
@@ -21,7 +21,7 @@ export default function fetchrMiddleware(fetchrInstance) {
       const { request, success, failure } = types;
       next({ ...rest, type: request });
 
-      return new Promise((resolve, reject) => {      
+      return new Promise((resolve, reject) => {
         fetchrInstance[method](service)
           .params(params || {})
           .body(body || {})
@@ -36,7 +36,7 @@ export default function fetchrMiddleware(fetchrInstance) {
               resolve();
             }
           });
-      })
+      });
 
     };
   };

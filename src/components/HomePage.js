@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { Link } from "react-router";
 import { getPhoto } from "../actions/photos";
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 
 @connect((state) => {
-  return { 
+  return {
     photo: state.photosById["119478695"]
   };
 })

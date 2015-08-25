@@ -13,17 +13,16 @@ import morgan from "morgan";
 
 import React from "react";
 import Location from "react-router/lib/Location";
+import Fetchr from "fetchr";
 
 import createRouter from "./router/createRouter";
 import Html from "./components/Html";
 import buildStore from "./utils/buildStore";
 
-import Fetchr from "fetchr";
 import PhotoService from "./services/PhotoService";
 
-Fetchr.registerService(PhotoService);
-
 const staticPath = path.resolve(__dirname, "../static");
+
 export default function (callback) {
 
   const app = express();
@@ -35,25 +34,24 @@ export default function (callback) {
   // Usual express stuff
   app.use(morgan(app.get("env") === "production" ? "combined" : "dev"));
   app.use(bodyParser.json());
-  app.use("/api", Fetchr.middleware());
   app.use(cookieParser());
   app.use(compression());
   app.use(favicon(`${staticPath}/assets/favicon.png`));
-
-  // TODO locales - we may want to consider i18n-node?
 
   // Use the `static` dir for serving static assets. On production, it contains the js
   // files built with webpack
   app.use(serveStatic(staticPath));
 
+  // Enable fetchr services to the /api path
+  Fetchr.registerService(PhotoService);
+  app.use("/api", Fetchr.middleware());
+
   // Render the app server-side and send it as response
   app.use((req, res, next) => {
 
     const location = new Location(req.path, req.query);
-    const fetchr = new Fetchr({
-      req: req
-    });
-    const store = buildStore(fetchr);
+    const fetcher = new Fetchr({ req });
+    const store = buildStore(fetcher);
 
     createRouter(location, undefined, store)
       .then((payload) => {

@@ -7,11 +7,10 @@ require("babel/register");
 var path = require("path");
 var webpack = require("webpack");
 var StatsWriterPlugin = require("webpack-stats-plugin").StatsWriterPlugin;
+var WebpackCleanupPlugin = require("webpack-cleanup-plugin");
 
 // var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var dist = path.resolve(__dirname, "../static/dist");
-
-var CleanupOutputPathPlugin = require("./utils/CleanupOutputPathPlugin");
 
 module.exports = {
   devtool: "source-map",
@@ -61,8 +60,7 @@ module.exports = {
     new StatsWriterPlugin(),
 
     // Cleanup extraneous files from the output directory
-    new CleanupOutputPathPlugin({
-      assetsPath: dist,
+    new WebpackCleanupPlugin({
       exclude: ["stats.json"]
     })
 

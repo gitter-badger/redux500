@@ -2,6 +2,7 @@
 
 // Create and start the express app. Export a function so we can test it
 
+import path from "path";
 import express from "express";
 import compression from "compression";
 import bodyParser from "body-parser";
@@ -13,7 +14,6 @@ import morgan from "morgan";
 import React from "react";
 import Location from "react-router/lib/Location";
 
-import { staticPath } from "../settings";
 import createRouter from "./router/createRouter";
 import Html from "./components/Html";
 import buildStore from "./utils/buildStore";
@@ -23,13 +23,14 @@ import PhotoService from "./services/PhotoService";
 
 Fetchr.registerService(PhotoService);
 
-export default function (settings, callback) {
+const staticPath = path.resolve(__dirname, "../static");
+export default function (callback) {
 
   const app = express();
 
-  for (const name in settings) {
-    app.set(name, settings[name]);
-  }
+  app.set("env", process.env.NODE_ENV || "development");
+  app.set("host", process.env.HOST || "0.0.0.0");
+  app.set("port", process.env.PORT || 3000);
 
   // Usual express stuff
   app.use(morgan(app.get("env") === "production" ? "combined" : "dev"));
@@ -65,6 +66,7 @@ export default function (settings, callback) {
         }
 
         const content = React.renderToString(component);
+
         const html = React.renderToStaticMarkup(
           <Html
             content={ content }
@@ -86,8 +88,6 @@ export default function (settings, callback) {
   });
 
   // Finally, start the express application
-  return app.listen(app.get("port"), () => {
-    callback(app);
-  });
+  return app.listen(app.get("port"), () => callback(app));
 
 }

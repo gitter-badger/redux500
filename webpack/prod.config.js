@@ -4,17 +4,20 @@
 
 require("babel/register");
 
+var path = require("path");
 var webpack = require("webpack");
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
+var StatsWriterPlugin = require("webpack-stats-plugin").StatsWriterPlugin;
 
-var writeStats = require("./utils/writeStats");
-var settings = require("../settings");
+// var ExtractTextPlugin = require("extract-text-webpack-plugin");
+var dist = path.resolve(__dirname, "../static/dist");
+
+var CleanupOutputPathPlugin = require("./utils/CleanupOutputPathPlugin");
 
 module.exports = {
   devtool: "source-map",
   entry: "./src/client.js",
   output: {
-    path: settings.distPath,
+    path: dist,
     filename: "[name]-[hash].js",
     chunkFilename: "[name]-[chunkhash].js",
     publicPath: "/dist/"
@@ -23,17 +26,17 @@ module.exports = {
     loaders: [
       { test: /\.js$/, exclude: /node_modules/, loaders: ["babel?cacheDirectory"] }
 
-      // { test: /\.(jpe?g|png|gif|svg)$/, loader: "url", query: { limit: 8000 } },
       // { test: /\.scss$/, loader: ExtractTextPlugin.extract("style", "css?modules&importLoaders=2&sourceMap&localIdentName=[name]-[local]-[hash:base64:5]!autoprefixer?browsers=last 2 version!sass?outputStyle=expanded&sourceMap") }
+      // { test: /\.(jpe?g|png|gif|svg)$/, loader: "url", query: { limit: 8000 } }
 
     ]
   },
   plugins: [
 
     // css files from the extract-text-plugin loader
-    new ExtractTextPlugin("[name]-[chunkhash].css", {
-      allChunks: true
-    }),
+    // new ExtractTextPlugin("style", "[name]-[chunkhash].css", {
+    //   allChunks: true
+    // }),
 
     new webpack.NoErrorsPlugin(),
 
@@ -54,12 +57,14 @@ module.exports = {
       }
     }),
 
-    // stats
-    function () {
-      this.plugin("done", function (stats) {
-        writeStats.call(this, stats, "production");
-      });
-    }
+    // Write out stats.json file to build directory.
+    new StatsWriterPlugin(),
+
+    // Cleanup extraneous files from the output directory
+    new CleanupOutputPathPlugin({
+      assetsPath: dist,
+      exclude: ["stats.json"]
+    })
 
   ]
 };

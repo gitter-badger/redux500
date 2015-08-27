@@ -1,6 +1,7 @@
 import { async200, async404, async500 } from "./actions/async";
 
 import HomePage from "./components/HomePage";
+import PhotoPage from "./components/PhotoPage";
 
 export default {
   home: {
@@ -25,7 +26,8 @@ export default {
   },
   photo: {
     path: "/photo/:id",
-    method: "get"
+    method: "get",
+    handler: PhotoPage
   },
   featured: {
     path: "/featured/:slug",

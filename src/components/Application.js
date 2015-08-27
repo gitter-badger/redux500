@@ -8,12 +8,13 @@ class Application extends Component {
   render() {
 
     const { router } = this.props;
-    const Handler = router.currentRoute.config.handler;
+    const { currentRoute } = router;
+    const Handler = currentRoute.config.handler;
     return (
       <div>
         Current route is: { router.currentRoute.name }
         <div>
-          <Handler />
+          <Handler {...currentRoute.params } />
         </div>
       </div>
     );

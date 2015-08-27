@@ -1,26 +1,44 @@
 /* eslint no-console: 0 */
 
 import React from "react";
-import BrowserHistory from "react-router/lib/BrowserHistory";
-import Location from "react-router/lib/Location";
 import Fetchr from "fetchr";
+import "babel-core/polyfill";
+import Router from "redux-universal-router";
+import { Provider } from "react-redux";
 
-import createRouter from "./router/createRouter";
 import createStore from "./utils/createStore";
+import routes from "./routes";
 
-const history = new BrowserHistory();
+import Application from "./components/Application";
+
+window.debug = require("debug");
+const debug = window.debug("redux500");
+
+const router = new Router(routes);
+
 const fetcher = new Fetchr({
   xhrPath: "/api",
   xhrTimeout: 30000
 });
 
 const store = createStore({ fetcher }, window.__INITIAL_DATA__);
-const location = new Location(document.location.pathname, document.location.search);
+const url = document.location.pathname;
 const mountNode = document.getElementById("content");
 
-createRouter(location, history, store)
-  .then(({ component }) => {
-    React.render(component, mountNode);
-  }, (err) => {
+router
+  .navigate(store, { url: url })
+  .then(() => {
+
+    React.render(
+      <Provider store={ store }>
+        { () => <Application /> }
+      </Provider>,
+      mountNode
+    );
+
+    debug("Application has been mounted");
+
+  })
+  .catch(err => {
     console.error(err);
   });

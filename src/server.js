@@ -11,13 +11,10 @@ import serveStatic from "serve-static";
 import favicon from "serve-favicon";
 import morgan from "morgan";
 
-import React from "react";
-import Location from "react-router/lib/Location";
 import Fetchr from "fetchr";
 
-import createRouter from "./router/createRouter";
-import Html from "./components/Html";
-import createStore from "./utils/createStore";
+import handleServerRendering from "./utils/handleServerRendering";
+import handleServerError from "./utils/handleServerError";
 
 import PhotoService from "./services/PhotoService";
 
@@ -37,6 +34,7 @@ export default function (callback) {
   app.use(cookieParser());
   app.use(compression());
   app.use(favicon(`${staticPath}/assets/favicon.png`));
+  app.set("json spaces", 2);
 
   // Use the `static` dir for serving static assets. On production, it contains the js
   // files built with webpack
@@ -46,46 +44,11 @@ export default function (callback) {
   Fetchr.registerService(PhotoService);
   app.use("/api", Fetchr.middleware());
 
-  // Render the app server-side and send it as response
-  app.use((req, res, next) => {
+  // Handle the app server-side rendering
+  app.use(handleServerRendering);
 
-    const location = new Location(req.path, req.query);
-
-    const store = createStore({
-      fetcher: new Fetchr({ req })
-    });
-
-    createRouter(location, undefined, store)
-      .then((payload) => {
-
-        const { component, transition, isRedirect, isNotFound } = payload;
-
-        if (isRedirect) {
-          res.redirect(transition.redirectInto.pathname);
-          return;
-        }
-
-        const content = React.renderToString(component);
-
-        const html = React.renderToStaticMarkup(
-          <Html
-            content={ content }
-            store={ store } />
-        );
-        res.status(isNotFound ? 404 : 200).send(`<!doctype html>${html}`);
-      })
-      .catch((err) => {
-        err.redirect ? res.redirect(err.redirect) : next(err);
-      });
-  });
-
-  // Generic server errors (e.g. not caught by components)
-  app.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
-    console.log("Error on request %s %s", req.method, req.url);
-    console.log(err);
-    console.log(err.stack);
-    res.status(500).send("Something bad happened");
-  });
+  // Last middleware: handle generic errors
+  app.use(handleServerError);
 
   // Finally, start the express application
   return app.listen(app.get("port"), () => callback(app));

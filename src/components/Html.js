@@ -34,6 +34,9 @@ class Html extends Component {
     const title = "Redux500";
     const description = "Isomorphic500 implemented in Redux fashion";
 
+    const state = store.getState();
+    delete state.router;
+
     return (
       <html lang="en-us">
         <head>
@@ -54,7 +57,7 @@ class Html extends Component {
         <body>
           <div id="content" dangerouslySetInnerHTML={ {__html: content} } />
 
-          <script dangerouslySetInnerHTML={ {__html: `window.__INITIAL_DATA__=${serialize(store.getState())};`} } />
+          <script dangerouslySetInnerHTML={ {__html: `window.__INITIAL_DATA__=${serialize(state)};`} } />
 
           { scripts.map((src, i) => <script src={ src } key={ i } />) }
 

@@ -1,0 +1,8 @@
+{
+  "watch": [
+    "src/server.js",
+    "/Users/giampaolo/Development/redux-universal-router/lib",
+    "src/routes.js",
+    "src/utils/handleServer*.*"
+  ]
+}

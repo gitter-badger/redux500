@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "NODE_ENV=production node index",
-    "dev": "NODE_ENV=development DEBUG=redux500 node index",
+    "dev": "NODE_ENV=development DEBUG=redux500,redux,redux-universal-router nodemon index",
     "prod": "NODE_ENV=production PORT=8080 DEBUG=redux500 node index",
     "build": "webpack --stats --config ./webpack/prod.config.js",
     "lint": "eslint index.js src webpack",
@@ -37,9 +37,10 @@
   },
   "homepage": "https://github.com/gpbl/redux500#readme",
   "devDependencies": {
+    "nodemon": "1.4.1",
     "react-hot-loader": "1.2.8",
-    "webpack-dev-server": "1.10.1",
     "redux-devtools": "1.0.2",
+    "webpack-dev-server": "1.10.1",
     "webpack-error-notification": "0.1.4"
   },
   "dependencies": {
@@ -54,6 +55,7 @@
     "cookie-parser": "1.3.5",
     "coveralls": "2.11.4",
     "css-loader": "0.16.0",
+    "debug": "2.2.0",
     "eslint": "1.2.1",
     "eslint-plugin-react": "3.3.0",
     "express": "4.13.3",

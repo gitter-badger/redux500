@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { getPhoto } from "../actions/photos";
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 
 class PhotoPage extends Component {
 

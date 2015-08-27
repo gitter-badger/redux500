@@ -1,17 +1,16 @@
 // Create a redux store with middlewares
 
-import { createStore, combineReducers, applyMiddleware } from "redux";
-import fetchrMiddleware from "../middlewares/fetchrMiddleware";
-import * as reducers from "../reducers/index";
+import { createStore, applyMiddleware } from "redux";
 
-const reducer = combineReducers(reducers);
+import reducer from "../reducers/index";
+import fetchrMiddleware from "../middlewares/fetchrMiddleware";
 
 export default function({ fetcher }, data) {
 
   const createStoreWithMiddleware = applyMiddleware(
 
     // apply the fetchr-middleware to interact with fetchr services
-    fetchrMiddleware(fetcher)
+    fetchrMiddleware(fetcher),
 
   )(createStore);
 

@@ -11,7 +11,7 @@ export function async200() {
         type: "DATA_SUCCESS",
         payload: data
       });
-    }, 1000);
+    }, 5000);
 
   });
 
@@ -19,12 +19,12 @@ export function async200() {
 
 export function async404() {
   return new Promise((resolve, reject) => {
-    setTimeout(() => reject({statusCode: 404}), 1000);
+    setTimeout(() => resolve({statusCode: 404}), 5000);
   });
 }
 
 export function async500() {
   return new Promise((resolve, reject) => {
-    setTimeout(() => reject({statusCode: 500}), 1000);
+    setTimeout(() => resolve({statusCode: 500}), 5000);
   });
 }

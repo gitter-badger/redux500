@@ -14,8 +14,6 @@ import Application from "./components/Application";
 window.debug = require("debug");
 const debug = window.debug("redux500");
 
-const router = new Router(routes);
-
 const fetcher = new Fetchr({
   xhrPath: "/api",
   xhrTimeout: 30000
@@ -25,8 +23,9 @@ const store = createStore({ fetcher }, window.__INITIAL_DATA__);
 const url = document.location.pathname;
 const mountNode = document.getElementById("content");
 
-router
-  .navigate(store, { url: url })
+const router = new Router({ store, routes });
+router.listen();  // Make router listen to browser's history
+router.navigate({ url: url })
   .then(() => {
 
     React.render(
@@ -35,6 +34,7 @@ router
       </Provider>,
       mountNode
     );
+
 
     debug("Application has been mounted");
 

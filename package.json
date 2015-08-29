@@ -35,11 +35,12 @@
   "bugs": {
     "url": "https://github.com/gpbl/redux500/issues"
   },
+  "private": true,
   "homepage": "https://github.com/gpbl/redux500#readme",
   "devDependencies": {
     "nodemon": "1.4.1",
     "react-hot-loader": "1.2.8",
-    "redux-devtools": "1.0.2",
+    "redux-devtools": "1.1.2",
     "webpack-dev-server": "1.10.1",
     "webpack-error-notification": "0.1.4"
   },
@@ -70,6 +71,7 @@
     "react-redux": "1.0.1",
     "redux": "1.0.1",
     "redux-promise": "0.5.0",
+    "redux-universal-router": "git+ssh://git@github.com:gpbl/react-universal-router",
     "sass-loader": "2.0.1",
     "serialize-javascript": "1.1.0",
     "serve-favicon": "2.3.0",

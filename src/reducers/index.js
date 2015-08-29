@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import router from "redux-universal-router/reducer";
+import { reducer as router } from "redux-universal-router"; // reducer must be saved as `router` in the store
 
 import photos from "./photos";
 import data from "./data";

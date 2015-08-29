@@ -11,16 +11,16 @@ import createStore from "./createStore";
 import Html from "../components/Html";
 import Application from "../components/Application";
 
-const router = new Router(routes);
-
 export default function(req, res, next) {
 
   const store = createStore({
     fetcher: new Fetchr({ req })
   });
 
-  router
-    .navigate(store, { url: req.url })
+  const router = new Router({ store, routes });
+
+  router({ store, routes })
+    .navigate({ url: req.url })
     .then(navigationResult => {
 
       const content = React.renderToString(

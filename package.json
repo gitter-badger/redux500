@@ -71,7 +71,7 @@
     "react-redux": "1.0.1",
     "redux": "1.0.1",
     "redux-promise": "0.5.0",
-    "redux-universal-router": "git+ssh://git@github.com:gpbl/react-universal-router",
+    "redux-universal-router": "git+ssh://git@github.com/gpbl/redux-universal-router.git",
     "sass-loader": "2.0.1",
     "serialize-javascript": "1.1.0",
     "serve-favicon": "2.3.0",

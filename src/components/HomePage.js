@@ -12,6 +12,9 @@ class HomePage extends Component {
           <Link to="/featured/upcoming">Upcoming Page</Link>
         </p>
         <p>
+          <Link to="/featured/popular">Popular Page</Link>
+        </p>
+        <p>
           <Link to={ `/photo/119478695` }>Link to Photo</Link>
         </p>
       </div>

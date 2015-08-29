@@ -19,7 +19,7 @@ export default function(req, res, next) {
 
   const router = new Router({ store, routes });
 
-  router({ store, routes })
+  router
     .navigate({ url: req.url })
     .then(navigationResult => {
 

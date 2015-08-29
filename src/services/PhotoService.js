@@ -8,6 +8,9 @@ const PhotoService = {
       .query({ consumer_key: "CLmpqnpwGLKetORtjc5gb9tC2hllfd6cqdfzHqFD" })
       .end((err, res) => {
         if (err) {
+          if (err.status) {
+            err.statusCode = err.status;
+          }
           return done(err);
         }
 

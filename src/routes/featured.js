@@ -1,6 +1,6 @@
 const FeaturedRoute = {
 
-  path: "featured/:slug",
+  path: "/featured/:slug",
 
   getComponents(callback) {
     if (process.env.BROWSER) {

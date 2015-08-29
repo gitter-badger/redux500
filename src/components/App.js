@@ -8,18 +8,22 @@ class App extends Component {
     store: PropTypes.object.isRequired
   }
 
-  componentWillMount() {
+  componentDidMount() {
     const { router, store } = this.context;
+
+    // this has to be done here for any client side navigations to trigger hooks
     this.transitionHook = fireRouteAction(store);
     router.addTransitionHook(this.transitionHook);
   }
 
   componentWillUnmount() {
-    const {router} = this.context;
+    const { router } = this.context;
+    // clean up any hooks to prevent leaks
     router.removeTransitionHook(this.transitionHook);
   }
 
   render() {
+
     return (
       <div>
         { this.props.children }

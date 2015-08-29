@@ -4,7 +4,6 @@ import { Link } from "react-router";
 class HomePage extends Component {
 
   render() {
-    const { photo } = this.props;
 
     return (
       <div>

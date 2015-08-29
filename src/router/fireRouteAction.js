@@ -17,7 +17,7 @@ export default function fireRouteAction(store) {
       // - TODO this may not apply for some case, to be refactored later when use case expands
       // - TODO we have to make sure the route action does not fire again after bootstrap from server data
       matchedRoute
-        .runAction(store) // passing store instance so action can run dispatch calls
+        .runAction(store, nextState.params) // passing store instance so action can run dispatch calls
         .then(function() {
           callback();
         })

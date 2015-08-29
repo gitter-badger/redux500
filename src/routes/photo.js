@@ -16,8 +16,8 @@ const PhotoRoute = {
   },
 
   // special hook function detected by our "fireRouteAction" transition hook
-  runAction(store) {
-    return store.dispatch(getPhoto(119478695 ));
+  runAction(store, params) {
+    return store.dispatch(getPhoto(params.id));
   }
 };
 

@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-@connect(function mapStateToProps(state) {
+@connect(function mapStateToProps(state, routerNextState) {
+  const photoId = routerNextState.params.id;
+
   return {
-    photo: state.photosById[119478695]
+    photo: state.photosById[photoId]
   };
 })
 class PhotoPage extends Component {

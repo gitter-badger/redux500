@@ -15,7 +15,10 @@ class HomePage extends Component {
           <Link to="/featured/popular">Popular Page</Link>
         </p>
         <p>
-          <Link to={ `/photo/119478695` }>Link to Photo</Link>
+          <Link to={ `/photo/119478695` }>Link to Photo 1</Link>
+        </p>
+        <p>
+          <Link to={ `/photo/2792334` }>Link to Photo 2</Link>
         </p>
       </div>
     );

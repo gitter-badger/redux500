@@ -11,7 +11,8 @@ module.exports = function(config) {
     client: {
       mocha: {
         reporter: "html",
-        ui: "bdd"
+        ui: "bdd",
+        timeout: 5000
       }
     },
     plugins: [

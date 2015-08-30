@@ -21,7 +21,7 @@ module.exports = function(config) {
       "karma-chai-plugins",
       "karma-mocha",
       "karma-sourcemap-loader",
-      "karma-webpack",
+      "karma-webpack"
     ],
     // run the bundle through the webpack and sourcemap plugins
     preprocessors: {

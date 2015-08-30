@@ -11,7 +11,7 @@
     "lint": "eslint index.js src webpack",
     "postinstall": "npm run build",
     "karma": "karma start tests/karma.conf.js",
-    "test": "mocha tests/* --compilers js:babel/register --recursive --reporter spec",
+    "test": "mocha tests/server/* --compilers js:babel/register --recursive --reporter spec",
     "cover": "istanbul cover -- _mocha tests/* --recursive --compilers js:babel/register --reporter spec"
   },
   "repository": {

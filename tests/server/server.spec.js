@@ -1,5 +1,5 @@
 import request from "supertest";
-import runServer from "../src/server";
+import runServer from "../../src/server";
 
 // Inspired by http://glebbahmutov.com/blog/how-to-correctly-unit-test-express-server/
 

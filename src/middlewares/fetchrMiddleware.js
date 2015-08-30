@@ -4,9 +4,9 @@ export default function fetchrMiddleware(fetchrInstance) {
   return ({dispatch, getState}) => {
     return next => action => {
       // We don't really need this yet, but I don't know how to test this
-      // if (typeof action === "function") {
-      //   return action(dispatch, getState);
-      // }
+      if (typeof action === "function") {
+        return action(dispatch, getState);
+      }
 
       const { fetchr, types, ...rest } = action;
       // straight away dispatch the action if service is not supplied

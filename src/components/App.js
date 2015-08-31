@@ -23,10 +23,16 @@ class App extends Component {
   }
 
   render() {
+    const { isTransitioning } = this.props;
 
     return (
       <div>
-        { this.props.children }
+        { 
+          isTransitioning ?
+          <h2>Loading...</h2>
+          :
+          this.props.children
+        }
         <p>
           <Link to="/">Back to Home</Link>
         </p>

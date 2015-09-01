@@ -1,5 +1,3 @@
-import _ from "lodash";
-
 /**
   * Factory that returns a transition hook for use by react-router
   * In this case, we create a hook that runs the routeAction defined on the last matched route
@@ -8,7 +6,7 @@ export default function fireRouteAction(store) {
 
   return (nextState, transition, callback) => {
 
-    const matchedRoute = _.last(nextState.branch);
+    const matchedRoute = nextState.branch[ nextState.branch.length - 1 ];
 
     if (typeof matchedRoute.runAction === "function") {
       // only run the routeAction if its defined
@@ -18,10 +16,10 @@ export default function fireRouteAction(store) {
       // - TODO we have to make sure the route action does not fire again after bootstrap from server data
       matchedRoute
         .runAction(store, nextState.params) // passing store instance so action can run dispatch calls
-        .then(function() {
+        .then(() => {
           callback();
         })
-        .catch(function(err) {
+        .catch((err) => {
           callback(err);
         });
     }

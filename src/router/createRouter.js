@@ -21,7 +21,7 @@ export default function createRouter(location, history, store) {
 
     // do not fireRouteAction on Router creation on the front end. 
     // this is because the server has already done this and dehydrated the state to the front end to pick up.
-    let transitionHooks = [];
+    const transitionHooks = [];
     if (!process.env.BROWSER) {
       transitionHooks.push(fireRouteAction(store));
     }

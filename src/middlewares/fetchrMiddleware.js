@@ -3,6 +3,7 @@ export default function fetchrMiddleware(fetchrInstance) {
   // store => next => action => ...
   return ({dispatch, getState}) => {
     return next => action => {
+      // We don't really need this yet, but I don't know how to test this
       if (typeof action === "function") {
         return action(dispatch, getState);
       }

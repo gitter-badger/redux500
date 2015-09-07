@@ -1,5 +1,6 @@
-import { PHOTO_LOAD_REQUEST, PHOTO_LOAD_SUCCESS, PHOTO_LOAD_FAILURE } from "constants/ActionTypes";
-import photosById from "reducers/photosById";
+import { PHOTO_LOAD_REQUEST, PHOTO_LOAD_SUCCESS, PHOTO_LOAD_FAILURE } from "../../../src/constants/ActionTypes";
+import photosById from "../../../src/reducers/photosById";
+import { expect } from "chai";
 
 describe("photosById reducer", () => {
   it("should return the initial state", () => {

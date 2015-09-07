@@ -1,4 +1,5 @@
-import fetchrMiddleware from "middlewares/fetchrMiddleware";
+import fetchrMiddleware from "../../../src/middlewares/fetchrMiddleware";
+import { expect } from "chai";
 
 const dummyError = { status: 400, statusCode: 400 };
 

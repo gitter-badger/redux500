@@ -1,6 +1,8 @@
+import { getPhoto } from "../actions/photos";
+
 const PhotoRoute = {
 
-  path: "photo/:id",
+  path: "/photo/:id",
 
   getComponents(callback) {
     if (process.env.BROWSER) {
@@ -11,6 +13,11 @@ const PhotoRoute = {
     else {
       callback(null, require("../components/PhotoPage"));
     }
+  },
+
+  // special hook function detected by our "fireRouteAction" transition hook
+  runAction(store, params) {
+    return store.dispatch(getPhoto(params.id));
   }
 };
 

@@ -3,7 +3,7 @@ import Router from "react-router";
 import { Provider } from "react-redux";
 
 import createRoutes from "./createRoutes";
-import fetchComponentData from "./fetchComponentData";
+import fireRouteAction from "./fireRouteAction";
 import NotFoundPage from "../components/NotFoundPage";
 
 // Create a Router as Promise. By returning a Promise, we can fetch the
@@ -15,7 +15,18 @@ export default function createRouter(location, history, store) {
 
   return new Promise((resolve, reject) => {
 
-    Router.run(routes, location, [fetchComponentData(store)], (err, initialState, transition) => {
+    // Note: defining the "fireRouteAction" to be run here does not mean it gets run everytime the route changes
+    // Putting here only guarantees that the first time the router loads the initial route, it passes through this hook first
+    // for subsequent route changes on the client side, see "components/App.js"
+
+    // do not fireRouteAction on Router creation on the front end. 
+    // this is because the server has already done this and dehydrated the state to the front end to pick up.
+    const transitionHooks = [];
+    if (!process.env.BROWSER) {
+      transitionHooks.push(fireRouteAction(store));
+    }
+
+    Router.run(routes, location, transitionHooks, (err, initialState, transition) => {
 
       const isNotFound = (err && err.statusCode === 404) ||
         initialState.components.some(component => component === NotFoundPage);

@@ -1,17 +1,17 @@
-import HomePage from "../components/HomePage";
-
+import App from "../components/App";
 import FeaturedRoute from "../routes/featured";
 import PhotoRoute from "../routes/photo";
 import NotFoundRoute from "../routes/not-found";
+import HomeRoute from "../routes/home";
 
 export default function createRoutes() {
 
   const routes = {
     childRoutes: [
       {
-        path: "/",
-        component: HomePage,
+        component: App,
         childRoutes: [
+          HomeRoute,
           FeaturedRoute,
           PhotoRoute,
           NotFoundRoute

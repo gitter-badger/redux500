@@ -8,6 +8,10 @@ import Fetchr from "fetchr";
 import createRouter from "./router/createRouter";
 import createStore from "./utils/createStore";
 
+if (process.env.BROWSER) {
+  require("./style/Application.styl");
+}
+
 const history = new BrowserHistory();
 const fetcher = new Fetchr({
   xhrPath: "/api",

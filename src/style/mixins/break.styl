@@ -1,0 +1,7 @@
+@import '../constants/breaks'
+break($device = "tablet")
+  $width = $break-tablet
+  if $device == "desktop"
+    $width = $break-desktop
+  @media screen and (min-width: $width)
+    {block}

@@ -1,6 +1,7 @@
 import React, { PropTypes, Component } from "react";
 import { Link } from "react-router";
 import fireRouteAction from "../router/fireRouteAction";
+import styles from "./App.jss";
 
 class App extends Component {
   static contextTypes = {
@@ -26,7 +27,7 @@ class App extends Component {
     const { isTransitioning } = this.props;
 
     return (
-      <div>
+      <div id={ styles.root } className={ styles["test-class"] }>
         { 
           isTransitioning ?
           <h2>Loading...</h2>

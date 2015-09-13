@@ -26,9 +26,8 @@ const config = {
   },
   module: {
     loaders: [
-      { test: /\.js$/, exclude: /node_modules/, loaders: ["react-hot", "babel?cacheDirectory"] }
-
-      // { test: /\.scss$/, loader: "style!css?modules&importLoaders=2&sourceMap&localIdentName=[name]-[local]-[hash:base64:5]!autoprefixer?browsers=last 2 version!sass?outputStyle=expanded&sourceMap" },
+      { test: /\.js$/, exclude: /node_modules/, loaders: ["react-hot", "babel?cacheDirectory"] },
+      { test: /\.jss$/, loader: "style!css?modules!jss"}
       // { test: /\.(jpe?g|png|gif|svg)$/, loader: "url", query: { limit: 8000 } }
     ]
   },

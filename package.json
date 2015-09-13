@@ -61,6 +61,8 @@
     "fetchr": "0.5.15",
     "file-loader": "0.8.4",
     "istanbul": "0.3.18",
+    "jss": "2.3.0",
+    "jss-loader": "1.0.0",
     "mocha": "2.2.5",
     "morgan": "1.6.1",
     "react": "0.13.3",

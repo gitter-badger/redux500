@@ -1,14 +1,7 @@
 import React, { PropTypes, Component } from "react";
 import { Link } from "react-router";
 import fireRouteAction from "../router/fireRouteAction";
-
-let styles;
-if (process.env.BROWSER) {
-  styles = require("../style/Application.styl");
-}
-else {
-  styles = {};
-}
+import styles from "../style/Application.styl";
 
 class App extends Component {
   static contextTypes = {

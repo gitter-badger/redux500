@@ -14,6 +14,10 @@ if (process.env.NODE_ENV === "production") {
 // Register babel to have ES6 support on the server
 require("babel/register");
 
+// Enable css modules to be loaded on the server side
+require("css-modules-require-hook")({
+});
+
 // Prevent issues with libraries using this var (see http://tinyurl.com/pcockwk)
 delete process.env.BROWSER;
 

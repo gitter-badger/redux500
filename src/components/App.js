@@ -2,6 +2,14 @@ import React, { PropTypes, Component } from "react";
 import { Link } from "react-router";
 import fireRouteAction from "../router/fireRouteAction";
 
+let styles;
+if (process.env.BROWSER) {
+  styles = require("../style/Application.styl");
+}
+else {
+  styles = {};
+}
+
 class App extends Component {
   static contextTypes = {
     router: PropTypes.object.isRequired,
@@ -26,7 +34,7 @@ class App extends Component {
     const { isTransitioning } = this.props;
 
     return (
-      <div>
+      <div id={ styles.root }>
         { 
           isTransitioning ?
           <h2>Loading...</h2>

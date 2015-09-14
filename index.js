@@ -1,5 +1,7 @@
 /* eslint no-console: 0, no-var: 0 */
 
+var stylus = require("stylus");
+
 // Use production react on the server side for production builds
 // https://gist.github.com/mridgway/778ecf55c317cf53eff3
 // According to Yahoo, the version of react shipped with NPM is not optimized for production
@@ -16,6 +18,13 @@ require("babel/register");
 
 // Enable css modules to be loaded on the server side
 require("css-modules-require-hook")({
+  extensions: [".styl"],
+  preprocessCss: function(data) {
+    var css = stylus(data)
+                .set("paths", [ __dirname + "/src/style"])
+                .render();
+    return css;
+  }
 });
 
 // Prevent issues with libraries using this var (see http://tinyurl.com/pcockwk)

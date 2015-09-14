@@ -1,6 +1,7 @@
 import React, { PropTypes, Component } from "react";
 import { Link } from "react-router";
 import fireRouteAction from "../router/fireRouteAction";
+import Page from "./Page";
 import styles from "../style/Application.styl";
 
 class App extends Component {
@@ -28,15 +29,17 @@ class App extends Component {
 
     return (
       <div id={ styles.root }>
-        { 
-          isTransitioning ?
-          <h2>Loading...</h2>
-          :
-          this.props.children
-        }
-        <p>
-          <Link to="/">Back to Home</Link>
-        </p>
+        <Page>
+          {
+            isTransitioning ?
+            <h2>Loading...</h2>
+            : 
+            this.props.children
+          }
+          <p>
+            <Link to="/">Back to Home</Link>
+          </p>
+        </Page>
       </div>
     );
   }

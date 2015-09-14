@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import Photo from "./Photo";
+import PhotoMeta from "./PhotoMeta";
 
 @connect(function mapStateToProps(state, routerNextState) {
   const photoId = routerNextState.params.id;
@@ -15,7 +17,9 @@ class PhotoPage extends Component {
 
     return (
       <div>
-        <img src={ photo.image_url } />
+        <h1>{ photo.name }</h1>
+        <PhotoMeta photo={ photo } />
+        <Photo imageSize={ 4 } photo={ photo } />
       </div>
     );
   }

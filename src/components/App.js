@@ -2,7 +2,11 @@ import React, { PropTypes, Component } from "react";
 import { Link } from "react-router";
 import fireRouteAction from "../router/fireRouteAction";
 import Page from "./Page";
-import styles from "../style/Application.styl";
+
+let styles = {};
+if (process.env.NODE_ENV !== "test") {
+  styles = require("../style/Application.styl");
+}
 
 class App extends Component {
   static contextTypes = {

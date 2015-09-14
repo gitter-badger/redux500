@@ -10,7 +10,7 @@
     "build": "webpack --stats --config ./webpack/prod.config.js",
     "lint": "eslint index.js src webpack",
     "postinstall": "npm run build",
-    "test": "mocha tests/* --compilers js:babel/register --recursive --reporter spec",
+    "test": "NODE_ENV=test mocha tests/* --compilers js:babel/register --recursive --reporter spec",
     "cover": "istanbul cover -- _mocha tests/* --recursive --compilers js:babel/register --reporter spec"
   },
   "repository": {

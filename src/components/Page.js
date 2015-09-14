@@ -1,5 +1,9 @@
 import React, { Component, PropTypes } from "react";
-import styles from "../style/Page.styl";
+
+let styles = {};
+if (process.env.NODE_ENV !== "test") {
+  styles = require("../style/Page.styl");
+}
 
 class Page extends Component {
 

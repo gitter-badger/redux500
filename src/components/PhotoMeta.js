@@ -3,7 +3,11 @@ import React, { PropTypes, Component } from "react";
 import PhotoAttribution from "./PhotoAttribution";
 import PhotoRating from "./PhotoRating";
 import PhotoCreatedAt from "./PhotoCreatedAt";
-import styles from "../style/PhotoMeta.styl";
+
+let styles = {};
+if (process.env.NODE_ENV !== "test") {
+  styles = require("../style/PhotoMeta.styl");
+}
 
 class PhotoMeta extends Component {
 

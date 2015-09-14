@@ -19,6 +19,7 @@ require("babel/register");
 // Enable css modules to be loaded on the server side
 require("css-modules-require-hook")({
   extensions: [".styl"],
+  rootDir: __dirname + "/src/style",
   preprocessCss: function(data) {
     var css = stylus(data)
                 .set("paths", [ __dirname + "/src/style"])

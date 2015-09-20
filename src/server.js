@@ -12,12 +12,13 @@ import favicon from "serve-favicon";
 import morgan from "morgan";
 
 import React from "react";
-import Location from "react-router/lib/Location";
+import createLocation from "history/lib/createLocation";
 import Fetchr from "fetchr";
 
 import createRouter from "./router/createRouter";
 import Html from "./components/Html";
 import createStore from "./utils/createStore";
+import createMemoryHistory from "history/lib/createMemoryHistory";
 
 import PhotoService from "./services/PhotoService";
 
@@ -49,13 +50,13 @@ export default function (callback) {
   // Render the app server-side and send it as response
   app.use((req, res, next) => {
 
-    const location = new Location(req.path, req.query);
+    const location = createLocation(req.path, req.query);
 
     const store = createStore({
       fetcher: new Fetchr({ req })
     });
 
-    createRouter(location, undefined, store)
+    createRouter(location, createMemoryHistory, store)
       .then((payload) => {
 
         const { component, transition, isRedirect, isNotFound } = payload;

@@ -1,10 +1,11 @@
 import React from "react";
-import Router from "react-router";
+import Router, { RoutingContext, match } from "react-router";
+// import { ReduxRouter } from "redux-router";
 import { Provider } from "react-redux";
 
 import createRoutes from "./createRoutes";
 import fireRouteAction from "./fireRouteAction";
-import NotFoundPage from "../components/NotFoundPage";
+// import NotFoundPage from "../components/NotFoundPage";
 
 // Create a Router as Promise. By returning a Promise, we can fetch the
 // data required for a route before rendering it.
@@ -21,44 +22,88 @@ export default function createRouter(location, history, store) {
 
     // do not fireRouteAction on Router creation on the front end. 
     // this is because the server has already done this and dehydrated the state to the front end to pick up.
-    const transitionHooks = [];
-    if (!process.env.BROWSER) {
-      transitionHooks.push(fireRouteAction(store));
-    }
+    // const transitionHooks = [];
+    // if (!process.env.BROWSER) {
+    //   transitionHooks.push(fireRouteAction(store));
+    // }
+    let component;
 
-    Router.run(routes, location, transitionHooks, (err, initialState, transition) => {
-
-      const isNotFound = (err && err.statusCode === 404) ||
-        initialState.components.some(component => component === NotFoundPage);
-
-      if (err && !isNotFound) {
-        return reject(err);
-      }
-
-      if (transition && transition.redirectInfo) {
-        return resolve({
-          transition: transition,
-          isRedirect: true
-        });
-      }
-
-      if (history) {  // history is available only client-side
-        initialState.history = history;
-      }
-
-      const component = (
+    if (process.env.BROWSER) {
+      component = (
         <Provider store={ store } key="provider">
-          { () => <Router { ...initialState } children={ routes } /> }
-        </Provider>
+          { () => <Router history={ history } children={ routes } /> }
+        </Provider> 
       );
 
       return resolve({
-        component: component,
-        isRedirect: false,
-        isNotFound: isNotFound
+        component
+      });
+    }
+    else {
+
+      match({ routes, location }, (err, redirectLocation, renderProps) => {
+        // const isNotFound = (err && err.statusCode === 404) ||
+        //   initialState.components.some(component => component === NotFoundPage);
+
+        if (err) {
+          return reject(err);
+        }
+
+        // console.log(renderProps)
+        fireRouteAction(store, renderProps, (err) => {
+          if (err) {
+            return reject(err);
+          } 
+
+          component = (
+            <Provider store={ store }>
+              { () => <RoutingContext { ...renderProps } /> }
+            </Provider>
+          );
+
+          return resolve({
+            component
+            // isRedirect: false,
+            // isNotFound: false
+          });
+        });
       });
 
-    });
+    }
+
+    // Router.run(routes, location, transitionHooks, (err, initialState, transition) => {
+
+    //   const isNotFound = (err && err.statusCode === 404) ||
+    //     initialState.components.some(component => component === NotFoundPage);
+
+    //   if (err && !isNotFound) {
+    //     return reject(err);
+    //   }
+
+    //   if (transition && transition.redirectInfo) {
+    //     return resolve({
+    //       transition: transition,
+    //       isRedirect: true
+    //     });
+    //   }
+
+    //   if (history) {  // history is available only client-side
+    //     initialState.history = history;
+    //   }
+
+    //   const component = (
+    //     <Provider store={ store } key="provider">
+    //       { () => <Router { ...initialState } children={ routes } /> }
+    //     </Provider>
+    //   );
+
+    //   return resolve({
+    //     component: component,
+    //     isRedirect: false,
+    //     isNotFound: isNotFound
+    //   });
+
+    // });
 
   });
 

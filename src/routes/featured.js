@@ -2,7 +2,7 @@ const FeaturedRoute = {
 
   path: "/featured/:slug",
 
-  getComponents(callback) {
+  getComponents(location, callback) {
     if (process.env.BROWSER) {
       require.ensure([], (require) => {
         callback(null, require("../components/FeaturedPage"));

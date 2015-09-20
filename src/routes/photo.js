@@ -4,7 +4,7 @@ const PhotoRoute = {
 
   path: "/photo/:id",
 
-  getComponents(callback) {
+  getComponents(location, callback) {
     if (process.env.BROWSER) {
       require.ensure([], (require) => {
         callback(null, require("../components/PhotoPage"));

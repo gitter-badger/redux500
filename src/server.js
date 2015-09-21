@@ -59,7 +59,7 @@ export default function (callback) {
     createRouter(location, createMemoryHistory, store)
       .then((payload) => {
 
-        const { component, transition, isRedirect, isNotFound } = payload;
+        const { component, transition, isRedirect, isNotFound, resolverData } = payload;
 
         if (isRedirect) {
           res.redirect(transition.redirectInto.pathname);
@@ -71,7 +71,9 @@ export default function (callback) {
         const html = React.renderToStaticMarkup(
           <Html
             content={ content }
-            store={ store } />
+            store={ store } 
+            resolverData={ resolverData }
+          />
         );
         res.status(isNotFound ? 404 : 200).send(`<!doctype html>${html}`);
       })

@@ -1,10 +1,9 @@
 import React from "react";
 import Router, { RoutingContext, match } from "react-router";
-// import { ReduxRouter } from "redux-router";
 import { Provider } from "react-redux";
-
 import createRoutes from "./createRoutes";
-import fireRouteAction from "./fireRouteAction";
+import { Resolver } from "react-resolver";
+
 // import NotFoundPage from "../components/NotFoundPage";
 
 // Create a Router as Promise. By returning a Promise, we can fetch the
@@ -49,24 +48,25 @@ export default function createRouter(location, history, store) {
           return reject(err);
         }
 
-        // console.log(renderProps)
-        fireRouteAction(store, renderProps, (err) => {
-          if (err) {
-            return reject(err);
-          } 
+        Resolver
+          .resolve(() => {
+            return (
+              <Provider store={ store } key="provider">
+                { () => <RoutingContext { ...renderProps } /> }
+              </Provider>
+            );
+          })
+          .then(({ Resolved, data }) => {
+            const component = (
+              <Resolved />
+            );
 
-          component = (
-            <Provider store={ store }>
-              { () => <RoutingContext { ...renderProps } /> }
-            </Provider>
-          );
-
-          return resolve({
-            component
-            // isRedirect: false,
-            // isNotFound: false
+            resolve({
+              component,
+              resolverData: data
+            });
           });
-        });
+        
       });
 
     }

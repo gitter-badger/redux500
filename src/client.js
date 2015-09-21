@@ -4,7 +4,7 @@ import React from "react";
 import createBrowserHistory from "history/lib/createBrowserHistory";
 import createLocation from "history/lib/createLocation";
 import Fetchr from "fetchr";
-
+import { Resolver } from "react-resolver";
 import createRouter from "./router/createRouter";
 import createStore from "./utils/createStore";
 
@@ -18,16 +18,16 @@ const history = createBrowserHistory();
 const location = createLocation(document.location.pathname, document.location.search);
 const mountNode = document.getElementById("content");
 
-history.registerTransitionHook(function(location, callback) {
-  console.log(location)
-  callback();
-});
+// history.registerTransitionHook(function(location, callback) {
+//   console.log(location)
+//   callback();
+// });
 
 
 
 createRouter(location, history, store)
   .then(({ component }) => {
-    React.render(component, mountNode);
+    Resolver.render(() => component, mountNode);
   }, (err) => {
     console.error(err);
   });

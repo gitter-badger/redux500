@@ -24,11 +24,12 @@ class Html extends Component {
 
   static propTypes = {
     content: PropTypes.string.isRequired,
-    store: PropTypes.object.isRequired
+    store: PropTypes.object.isRequired,
+    resolverData: PropTypes.object.isRequired
   }
 
   render() {
-    const { content, store } = this.props;
+    const { content, store, resolverData } = this.props;
     // TODO: grab title and description with react-helmet
 
     const title = "Redux500";
@@ -55,6 +56,7 @@ class Html extends Component {
           <div id="content" dangerouslySetInnerHTML={ {__html: content} } />
 
           <script dangerouslySetInnerHTML={ {__html: `window.__INITIAL_DATA__=${serialize(store.getState())};`} } />
+          <script dangerouslySetInnerHTML={ {__html: `window.__REACT_RESOLVER_PAYLOAD__=${serialize(resolverData)};`} } />
 
           { scripts.map((src, i) => <script src={ src } key={ i } />) }
 

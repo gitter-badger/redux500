@@ -1,35 +1,33 @@
 import React, { PropTypes, Component } from "react";
+import { connect } from "react-redux";
 import { Link } from "react-router";
-// import fireRouteAction from "../router/fireRouteAction";
 
+@connect(function mapStateToProps(state) {
+  return {
+    isTransitioning: state.transitions.isTransitioning
+  };
+})
 class App extends Component {
+  static propTypes = {
+    isTransitioning: PropTypes.bool.isRequired
+  }
+
   static contextTypes = {
     store: PropTypes.object.isRequired
   }
 
-  // componentDidMount() {
-  //   const { router, store } = this.context;
-
-  //   // this has to be done here for any client side navigations to trigger hooks
-  //   this.transitionHook = fireRouteAction(store);
-  //   router.addTransitionHook(this.transitionHook);
-  // }
-
-  // componentWillUnmount() {
-  //   const { router } = this.context;
-  //   // clean up any hooks to prevent leaks
-  //   router.removeTransitionHook(this.transitionHook);
-  // }
+  static defaultProps = {
+    isTransitioning: false
+  }
 
   render() {
     const { isTransitioning } = this.props;
 
     return (
       <div>
-        { 
+        {
           isTransitioning ?
-          <h2>Loading...</h2>
-          :
+          <h1>Loading...</h1> :
           this.props.children
         }
         <p>

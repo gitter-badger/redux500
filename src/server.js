@@ -56,14 +56,11 @@ export default function (callback) {
       fetcher: new Fetchr({ req })
     });
 
-    createRouter(location, createMemoryHistory, store)
-      .then((payload) => {
+    createRouter(location, null, store, true)
+      .then(({ component, redirectLocation, resolverData }) => {
 
-        const { component, transition, isRedirect, isNotFound, resolverData } = payload;
-
-        if (isRedirect) {
-          res.redirect(transition.redirectInto.pathname);
-          return;
+        if (redirectLocation) {
+          return res.redirect(redirectLocation.pathname + redirectLocation.search);
         }
 
         const content = React.renderToString(component);
@@ -75,7 +72,7 @@ export default function (callback) {
             resolverData={ resolverData }
           />
         );
-        res.status(isNotFound ? 404 : 200).send(`<!doctype html>${html}`);
+        res.send(`<!doctype html>${html}`);
       })
       .catch((err) => {
         err.redirect ? res.redirect(err.redirect) : next(err);

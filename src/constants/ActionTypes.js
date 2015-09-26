@@ -8,7 +8,10 @@ const ActionTypes = keyMirror({
   PHOTO_LOAD_SUCCESS: null,
   PHOTO_LOAD_FAILURE: null,
 
-  TEST_SUCCESS: null
+  TEST_SUCCESS: null,
+
+  TRANSITION_REQUEST: null,
+  TRANSITION_SUCCESS: null
 
 });
 

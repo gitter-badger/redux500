@@ -5,7 +5,14 @@ import { getPhoto } from "../actions/photos";
 
 @context("store")
 @resolve("photo", function({ store, routeParams }) {
-  return store.dispatch(getPhoto(routeParams.id));
+  // do not fetch if already cached
+  if (store.getState().photosById[routeParams.id]) {
+    return;
+  }
+  // fetch and wait before rendering
+  else {
+    return store.dispatch(getPhoto(routeParams.id));
+  }
 })
 @connect(function mapStateToProps(state, routerNextState) {
   const photoId = routerNextState.params.id;
@@ -18,9 +25,6 @@ class PhotoPage extends Component {
 
   render() {
     const { photo } = this.props;
-
-    console.log(photo)
-
     return (
       <div>
         <img src={ photo.image_url } />

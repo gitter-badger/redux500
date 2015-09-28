@@ -1,5 +1,7 @@
 # redux500
 
+[![Join the chat at https://gitter.im/gpbl/redux500](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/gpbl/redux500?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 The [redux](https://github.com/rackt/redux) version of [isomorphic500](http://github.com/gpbl/isomorphic500). Work in progress!
 
 [![Build Status](https://travis-ci.org/gpbl/redux500.svg?branch=master)](https://travis-ci.org/gpbl/redux500)
